@@ -1,9 +1,12 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const dotenv = require("dotenv");
 
 const app = express();
 
-const port = process.env.PORT || 5000;
+dotenv.config();
+
+const port = process.env.PORT;
 
 //Middleware to parse JSON Bodies
 app.use(bodyParser.json());
