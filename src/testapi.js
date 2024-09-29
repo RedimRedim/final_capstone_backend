@@ -293,7 +293,7 @@ app.get("/api/employees", (req, res) => {
   res.status(200).send({ employees });
 });
 
-app.get("/api/employees/monthly-salaries", (req, res) => {
+app.get("/api/employees/monthly-salary", (req, res) => {
   const data = {
     jan: 5000000,
     feb: 5950000,
