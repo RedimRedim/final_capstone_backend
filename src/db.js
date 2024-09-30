@@ -2,20 +2,31 @@ const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
 dotenv.config();
 
-async function main() {
-  const url = process.env.MONGODB_URL;
+class MongoDb {
+  constructor() {
+    this.db = this.connectDb();
+  }
 
-  const client = new MongoClient(url);
+  async connectDb() {
+    try {
+      const url = process.env.MONGODB_URL;
+      const client = new MongoClient(url);
+      await client.connect();
+      const database = client.db(process.env.DB_NAME);
 
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB server");
-  } catch (error) {
-    console.error("Failed to connect to MongoDB server", error);
-  } finally {
-    await client.close();
-    console.log("Connection to MongoDB server closed");
+      console.log("Connected to MongoDB server");
+      return database;
+    } catch (error) {
+      console.error("Failed to connect to MongoDB server", error);
+    }
+  }
+
+  async getAllEmployees() {
+    return await this.db;
   }
 }
 
-main().catch(console.error);
+const MongoDbClient = new MongoDb();
+await new Promise((resolve) => setTimeout(resolve, 1000));
+
+console.log(MongoDbClient.getAllEmployees());
