@@ -603,6 +603,40 @@ app.get("/api/employees/monthly-salary", (req, res) => {
   });
 });
 
+app.get("/api/employees/monthly-salary", (req, res) => {
+  const data = {
+    Jan: 5000000,
+    Feb: 5950000,
+    Mar: 5760000,
+    Apr: 5000000,
+    May: 5200000,
+    Jun: 5500000,
+    Jul: 5800000,
+    Aug: 5000000,
+    Sep: 5400000,
+  };
+
+  res.status(200).send({
+    data,
+  });
+});
+
+app.get("/api/employees/monthly-department", (req, res) => {
+  const data = {
+    jan: { IT: 2, ST: 1, FT: 2 },
+    feb: { IT: 5, ST: 3, FT: 5 },
+    mar: { IT: 3, ST: 2, FT: 2 },
+    apr: { IT: 2, ST: 2, FT: 3 },
+    may: { IT: 1, ST: 1, FT: 2 },
+    jun: { IT: 3, ST: 1, FT: 2 },
+    jul: { IT: 2, ST: 2, FT: 3 },
+  };
+
+  res.status(200).send({
+    data,
+  });
+});
+
 app.get("/api/employees/:employeeId", (req, res) => {
   const { employeeId } = req.params;
   const employee = employees.find((employee) => employee.uuid == employeeId);
