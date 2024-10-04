@@ -586,35 +586,176 @@ app.get("/api/employees", (req, res) => {
 });
 
 app.get("/api/employees/monthly-salary", (req, res) => {
-  const data = {
-    Jan: 5000000,
-    Feb: 5950000,
-    Mar: 5760000,
-    Apr: 5000000,
-    May: 5200000,
-    Jun: 5500000,
-    Jul: 5800000,
-    Aug: 5000000,
-    Sep: 5400000,
-  };
-
-  res.status(200).send({
-    data,
-  });
-});
-
-app.get("/api/employees/monthly-salary", (req, res) => {
-  const data = {
-    Jan: 5000000,
-    Feb: 5950000,
-    Mar: 5760000,
-    Apr: 5000000,
-    May: 5200000,
-    Jun: 5500000,
-    Jul: 5800000,
-    Aug: 5000000,
-    Sep: 5400000,
-  };
+  const data = [
+    {
+      month: "Jan",
+      salary: 500000,
+      totalEmployees: 5,
+      totalMale: 3,
+      totalFemale: 2,
+      totalRegular: 4,
+      totalProbation: 1,
+      departments: {
+        FT: 3,
+        ST: 1,
+        IT: 1,
+      },
+    },
+    {
+      month: "Feb",
+      salary: 520000,
+      totalEmployees: 5,
+      totalMale: 3,
+      totalFemale: 2,
+      totalRegular: 4,
+      totalProbation: 1,
+      departments: {
+        FT: 3,
+        ST: 1,
+        IT: 1,
+      },
+    },
+    {
+      month: "Mar",
+      salary: 530000,
+      totalEmployees: 6,
+      totalMale: 4,
+      totalFemale: 2,
+      totalRegular: 5,
+      totalProbation: 1,
+      departments: {
+        FT: 3,
+        ST: 2,
+        IT: 1,
+      },
+    },
+    {
+      month: "Apr",
+      salary: 540000,
+      totalEmployees: 6,
+      totalMale: 4,
+      totalFemale: 2,
+      totalRegular: 5,
+      totalProbation: 1,
+      departments: {
+        FT: 3,
+        ST: 2,
+        IT: 1,
+      },
+    },
+    {
+      month: "May",
+      salary: 550000,
+      totalEmployees: 7,
+      totalMale: 4,
+      totalFemale: 3,
+      totalRegular: 6,
+      totalProbation: 1,
+      departments: {
+        FT: 4,
+        ST: 2,
+        IT: 1,
+      },
+    },
+    {
+      month: "Jun",
+      salary: 560000,
+      totalEmployees: 7,
+      totalMale: 4,
+      totalFemale: 3,
+      totalRegular: 6,
+      totalProbation: 1,
+      departments: {
+        FT: 4,
+        ST: 2,
+        IT: 1,
+      },
+    },
+    {
+      month: "Jul",
+      salary: 570000,
+      totalEmployees: 8,
+      totalMale: 5,
+      totalFemale: 3,
+      totalRegular: 7,
+      totalProbation: 1,
+      departments: {
+        FT: 4,
+        ST: 3,
+        IT: 1,
+      },
+    },
+    {
+      month: "Aug",
+      salary: 580000,
+      totalEmployees: 8,
+      totalMale: 5,
+      totalFemale: 3,
+      totalRegular: 7,
+      totalProbation: 1,
+      departments: {
+        FT: 4,
+        ST: 3,
+        IT: 1,
+      },
+    },
+    {
+      month: "Sep",
+      salary: 590000,
+      totalEmployees: 9,
+      totalMale: 5,
+      totalFemale: 4,
+      totalRegular: 8,
+      totalProbation: 1,
+      departments: {
+        FT: 5,
+        ST: 3,
+        IT: 1,
+      },
+    },
+    {
+      month: "Oct",
+      salary: 600000,
+      totalEmployees: 10,
+      totalMale: 6,
+      totalFemale: 4,
+      totalRegular: 9,
+      totalProbation: 1,
+      departments: {
+        FT: 5,
+        ST: 4,
+        IT: 1,
+      },
+    },
+    {
+      month: "Nov",
+      salary: 610000,
+      totalEmployees: 10,
+      totalMale: 6,
+      totalFemale: 4,
+      totalRegular: 9,
+      totalProbation: 1,
+      departments: {
+        FT: 5,
+        ST: 4,
+        IT: 1,
+      },
+    },
+    {
+      month: "Dec",
+      salary: 620000,
+      totalEmployees: 11,
+      totalMale: 7,
+      totalFemale: 4,
+      totalRegular: 10,
+      totalProbation: 1,
+      departments: {
+        FT: 6,
+        ST: 4,
+        IT: 1,
+      },
+    },
+  ];
 
   res.status(200).send({
     data,
