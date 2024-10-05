@@ -555,7 +555,12 @@ const employeeSchema = Joi.object({
 
 //Middleware to parse JSON Bodies
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:8080", // Allow only this origin
+  })
+);
+
 app.get("/api/employees", (req, res) => {
   const { department, sex, employeeType } = req.query;
   if (!employees && !employees.length > 0) {
@@ -792,7 +797,7 @@ app.get("/api/employees/:employeeId", (req, res) => {
 });
 
 //adding newEmployee POST request
-app.post("/employees", (req, res) => {
+app.post("/api/employees", (req, res) => {
   const { error, value } = employeeSchema.validate(req.body);
   const createdDate = new Date().toISOString();
   const newEmployee = {
