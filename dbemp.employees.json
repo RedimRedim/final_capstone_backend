@@ -1,0 +1,572 @@
+[{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626af5"
+  },
+  "uuid": "001",
+  "name": "Alice Smith",
+  "sex": "Female",
+  "department": "IT",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 70000,
+    "Feb": 72000,
+    "Mar": 75000,
+    "Apr": 76000,
+    "May": 77000,
+    "Jun": 78000
+  },
+  "isResign": false,
+  "createdDate": "2022-01-15T09:00:00",
+  "updatedDate": "2023-01-10T10:30:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626af6"
+  },
+  "uuid": "002",
+  "name": "Bob Johnson",
+  "sex": "Male",
+  "department": "IT",
+  "employeeType": "Probation",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 80000,
+    "Feb": 82000,
+    "Mar": 81000,
+    "Apr": 83000,
+    "May": 84000,
+    "Jun": 85000
+  },
+  "isResign": false,
+  "createdDate": "2022-02-20T11:00:00",
+  "updatedDate": "2023-02-15T14:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626af7"
+  },
+  "uuid": "003",
+  "name": "fff",
+  "sex": "Male",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 65000,
+    "Feb": 67000,
+    "Mar": 66000,
+    "Apr": 68000,
+    "May": 69000,
+    "Jun": 70000
+  },
+  "isResign": false,
+  "createdDate": "2022-03-25T08:15:00",
+  "updatedDate": "2024-10-07T08:59:10.650Z"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626af8"
+  },
+  "uuid": "004",
+  "name": "Diana Prince",
+  "sex": "Female",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 75000,
+    "Feb": 77000,
+    "Mar": 76000,
+    "Apr": 78000,
+    "May": 79000,
+    "Jun": 80000
+  },
+  "isResign": false,
+  "createdDate": "2022-04-30T13:30:00",
+  "updatedDate": "2023-04-25T09:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626af9"
+  },
+  "uuid": "005",
+  "name": "Ethan Hunt",
+  "sex": "Male",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 72000,
+    "Feb": 74000,
+    "Mar": 73000,
+    "Apr": 75000,
+    "May": 76000,
+    "Jun": 77000
+  },
+  "isResign": false,
+  "createdDate": "2022-05-05T15:00:00",
+  "updatedDate": "2023-05-01T10:15:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626afa"
+  },
+  "uuid": "006",
+  "name": "fff",
+  "sex": "Female",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 68000,
+    "Feb": 69000,
+    "Mar": 70000,
+    "Apr": 71000,
+    "May": 72000,
+    "Jun": 73000
+  },
+  "isResign": false,
+  "createdDate": "2022-06-10T10:30:00",
+  "updatedDate": "2024-10-07T08:59:33.267Z"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626afb"
+  },
+  "uuid": "007",
+  "name": "George Martin",
+  "sex": "Male",
+  "department": "IT",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 76000,
+    "Feb": 77000,
+    "Mar": 78000,
+    "Apr": 79000,
+    "May": 80000,
+    "Jun": 81000
+  },
+  "isResign": false,
+  "createdDate": "2022-07-15T09:00:00",
+  "updatedDate": "2023-07-10T10:30:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626afc"
+  },
+  "uuid": "008",
+  "name": "Hannah Lee",
+  "sex": "Female",
+  "department": "IT",
+  "employeeType": "Probation",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 82000,
+    "Feb": 83000,
+    "Mar": 84000,
+    "Apr": 85000,
+    "May": 86000,
+    "Jun": 87000
+  },
+  "isResign": false,
+  "createdDate": "2022-08-20T11:00:00",
+  "updatedDate": "2023-08-15T14:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626afd"
+  },
+  "uuid": "009",
+  "name": "Ian Wright",
+  "sex": "Male",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 67000,
+    "Feb": 68000,
+    "Mar": 69000,
+    "Apr": 70000,
+    "May": 71000,
+    "Jun": 72000
+  },
+  "isResign": false,
+  "createdDate": "2022-09-25T08:15:00",
+  "updatedDate": "2023-09-20T12:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626afe"
+  },
+  "uuid": "010",
+  "name": "Jane Doe",
+  "sex": "Female",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 77000,
+    "Feb": 78000,
+    "Mar": 79000,
+    "Apr": 80000,
+    "May": 81000,
+    "Jun": 82000
+  },
+  "isResign": false,
+  "createdDate": "2022-10-30T13:30:00",
+  "updatedDate": "2023-10-25T09:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626aff"
+  },
+  "uuid": "011",
+  "name": "Kevin Smith",
+  "sex": "Male",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 74000,
+    "Feb": 75000,
+    "Mar": 76000,
+    "Apr": 77000,
+    "May": 78000,
+    "Jun": 79000
+  },
+  "isResign": false,
+  "createdDate": "2022-11-05T15:00:00",
+  "updatedDate": "2023-11-01T10:15:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b00"
+  },
+  "uuid": "012",
+  "name": "Laura Johnson",
+  "sex": "Female",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 69000,
+    "Feb": 70000,
+    "Mar": 71000,
+    "Apr": 72000,
+    "May": 73000,
+    "Jun": 74000
+  },
+  "isResign": false,
+  "createdDate": "2022-12-10T10:30:00",
+  "updatedDate": "2023-12-05T11:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b01"
+  },
+  "uuid": "013",
+  "name": "Michael Brown",
+  "sex": "Male",
+  "department": "IT",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 78000,
+    "Feb": 79000,
+    "Mar": 80000,
+    "Apr": 81000,
+    "May": 82000,
+    "Jun": 83000
+  },
+  "isResign": false,
+  "createdDate": "2023-01-15T09:00:00",
+  "updatedDate": "2024-01-10T10:30:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b02"
+  },
+  "uuid": "014",
+  "name": "Nina Williams",
+  "sex": "Female",
+  "department": "IT",
+  "employeeType": "Probation",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 83000,
+    "Feb": 84000,
+    "Mar": 85000,
+    "Apr": 86000,
+    "May": 87000,
+    "Jun": 88000
+  },
+  "isResign": false,
+  "createdDate": "2023-02-20T11:00:00",
+  "updatedDate": "2024-02-15T14:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b03"
+  },
+  "uuid": "007",
+  "name": "George Martin",
+  "sex": "Male",
+  "department": "IT",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 76000,
+    "Feb": 77000,
+    "Mar": 78000,
+    "Apr": 79000,
+    "May": 80000,
+    "Jun": 81000
+  },
+  "isResign": false,
+  "createdDate": "2022-07-15T09:00:00",
+  "updatedDate": "2023-07-10T10:30:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b04"
+  },
+  "uuid": "008",
+  "name": "Hannah Lee",
+  "sex": "Female",
+  "department": "IT",
+  "employeeType": "Probation",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 82000,
+    "Feb": 83000,
+    "Mar": 84000,
+    "Apr": 85000,
+    "May": 86000,
+    "Jun": 87000
+  },
+  "isResign": false,
+  "createdDate": "2022-08-20T11:00:00",
+  "updatedDate": "2023-08-15T14:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b05"
+  },
+  "uuid": "009",
+  "name": "Ian Wright",
+  "sex": "Male",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 67000,
+    "Feb": 68000,
+    "Mar": 69000,
+    "Apr": 70000,
+    "May": 71000,
+    "Jun": 72000
+  },
+  "isResign": false,
+  "createdDate": "2022-09-25T08:15:00",
+  "updatedDate": "2023-09-20T12:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b06"
+  },
+  "uuid": "010",
+  "name": "Jane Doe",
+  "sex": "Female",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 77000,
+    "Feb": 78000,
+    "Mar": 79000,
+    "Apr": 80000,
+    "May": 81000,
+    "Jun": 82000
+  },
+  "isResign": false,
+  "createdDate": "2022-10-30T13:30:00",
+  "updatedDate": "2023-10-25T09:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b07"
+  },
+  "uuid": "011",
+  "name": "Kevin Smith",
+  "sex": "Male",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 74000,
+    "Feb": 75000,
+    "Mar": 76000,
+    "Apr": 77000,
+    "May": 78000,
+    "Jun": 79000
+  },
+  "isResign": false,
+  "createdDate": "2022-11-05T15:00:00",
+  "updatedDate": "2023-11-01T10:15:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b08"
+  },
+  "uuid": "012",
+  "name": "Laura Johnson",
+  "sex": "Female",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 69000,
+    "Feb": 70000,
+    "Mar": 71000,
+    "Apr": 72000,
+    "May": 73000,
+    "Jun": 74000
+  },
+  "isResign": false,
+  "createdDate": "2022-12-10T10:30:00",
+  "updatedDate": "2023-12-05T11:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b09"
+  },
+  "uuid": "013",
+  "name": "Michael Brown",
+  "sex": "Male",
+  "department": "IT",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 78000,
+    "Feb": 79000,
+    "Mar": 80000,
+    "Apr": 81000,
+    "May": 82000,
+    "Jun": 83000
+  },
+  "isResign": false,
+  "createdDate": "2023-01-15T09:00:00",
+  "updatedDate": "2024-01-10T10:30:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b0a"
+  },
+  "uuid": "014",
+  "name": "Nina Williams",
+  "sex": "Female",
+  "department": "IT",
+  "employeeType": "Probation",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 83000,
+    "Feb": 84000,
+    "Mar": 85000,
+    "Apr": 86000,
+    "May": 87000,
+    "Jun": 88000
+  },
+  "isResign": false,
+  "createdDate": "2023-02-20T11:00:00",
+  "updatedDate": "2024-02-15T14:45:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b0b"
+  },
+  "uuid": "015",
+  "name": "Oscar Martinez",
+  "sex": "Male",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "DevOps Engineer",
+  "salary": {
+    "Jan": 68000,
+    "Feb": 69000,
+    "Mar": 70000,
+    "Apr": 71000,
+    "May": 72000,
+    "Jun": 73000
+  },
+  "isResign": false,
+  "createdDate": "2023-03-25T08:15:00",
+  "updatedDate": "2024-03-20T12:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b0c"
+  },
+  "uuid": "016",
+  "name": "Paula Abdul",
+  "sex": "Female",
+  "department": "ST",
+  "employeeType": "Regular",
+  "role": "Software Engineer",
+  "salary": {
+    "Jan": 78000,
+    "Feb": 79000,
+    "Mar": 80000,
+    "Apr": 81000,
+    "May": 82000,
+    "Jun": 83000
+  },
+  "isResign": false,
+  "createdDate": "2023-04-30T13:30:00",
+  "updatedDate": "2024-04-25T09:00:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b0d"
+  },
+  "uuid": "017",
+  "name": "Quincy Adams",
+  "sex": "Male",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 75000,
+    "Feb": 76000,
+    "Mar": 77000,
+    "Apr": 78000,
+    "May": 79000,
+    "Jun": 80000
+  },
+  "isResign": false,
+  "createdDate": "2023-05-05T15:00:00",
+  "updatedDate": "2024-05-01T10:15:00"
+},
+{
+  "_id": {
+    "$oid": "66fa3b8c4832fcecd1626b0e"
+  },
+  "uuid": "018",
+  "name": "Rachel Green",
+  "sex": "Female",
+  "department": "FT",
+  "employeeType": "Regular",
+  "role": "DBA",
+  "salary": {
+    "Jan": 70000,
+    "Feb": 71000,
+    "Mar": 72000,
+    "Apr": 73000,
+    "May": 74000,
+    "Jun": 75000
+  },
+  "isResign": false,
+  "createdDate": "2023-06-10T10:30:00",
+  "updatedDate": "2024-06-05T11:45:00"
+}]

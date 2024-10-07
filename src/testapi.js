@@ -3,7 +3,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
 const Joi = require("joi");
-const { nanoid } = require("nanoid");
 const cors = require("cors");
 const { MongoDb } = require("./db.js");
 
@@ -559,6 +558,7 @@ const employeeSchema = Joi.object({
 
 //Middleware to parse JSON Bodies
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:8080", // Allow only this origin
@@ -580,24 +580,6 @@ app.get("/api/employees", async (req, res) => {
         .send({ status: "fail", message: "employee not found" });
     }
 
-    // if (department || sex || employeeType) {
-    //   const finalResult = employees.filter((employee) => {
-    //     const matchedDepartment = department
-    //       ? employee.department.toLowerCase().includes(department.toLowerCase())
-    //       : true;
-    //     const matchedSex = sex
-    //       ? employee.sex.toLowerCase().includes(sex.toLowerCase())
-    //       : true;
-    //     const matchedEmployeeType = employeeType
-    //       ? employee.employeeType
-    //           .toLowerCase()
-    //           .includes(employeeType.toLowerCase())
-    //       : true;
-
-    //     return matchedDepartment && matchedSex && matchedEmployeeType;
-    //   });
-    //   return res.status(200).send({ finalResult });
-    // }
     res.status(200).send({ employees });
   } catch (error) {
     console.error(error);
@@ -605,198 +587,202 @@ app.get("/api/employees", async (req, res) => {
   }
 });
 
-app.get("/api/employees/monthly-salary", (req, res) => {
-  const data = [
-    {
-      month: "Jan",
-      salary: 500000,
-      totalEmployees: 5,
-      totalMale: 3,
-      totalFemale: 2,
-      totalRegular: 4,
-      totalProbation: 1,
-      departments: {
-        FT: 3,
-        ST: 1,
-        IT: 1,
-      },
-    },
-    {
-      month: "Feb",
-      salary: 520000,
-      totalEmployees: 5,
-      totalMale: 3,
-      totalFemale: 2,
-      totalRegular: 4,
-      totalProbation: 1,
-      departments: {
-        FT: 3,
-        ST: 1,
-        IT: 1,
-      },
-    },
-    {
-      month: "Mar",
-      salary: 530000,
-      totalEmployees: 6,
-      totalMale: 4,
-      totalFemale: 2,
-      totalRegular: 5,
-      totalProbation: 1,
-      departments: {
-        FT: 3,
-        ST: 2,
-        IT: 1,
-      },
-    },
-    {
-      month: "Apr",
-      salary: 540000,
-      totalEmployees: 6,
-      totalMale: 4,
-      totalFemale: 2,
-      totalRegular: 5,
-      totalProbation: 1,
-      departments: {
-        FT: 3,
-        ST: 2,
-        IT: 1,
-      },
-    },
-    {
-      month: "May",
-      salary: 550000,
-      totalEmployees: 7,
-      totalMale: 4,
-      totalFemale: 3,
-      totalRegular: 6,
-      totalProbation: 1,
-      departments: {
-        FT: 4,
-        ST: 2,
-        IT: 1,
-      },
-    },
-    {
-      month: "Jun",
-      salary: 560000,
-      totalEmployees: 7,
-      totalMale: 4,
-      totalFemale: 3,
-      totalRegular: 6,
-      totalProbation: 1,
-      departments: {
-        FT: 4,
-        ST: 2,
-        IT: 1,
-      },
-    },
-    {
-      month: "Jul",
-      salary: 570000,
-      totalEmployees: 8,
-      totalMale: 5,
-      totalFemale: 3,
-      totalRegular: 7,
-      totalProbation: 1,
-      departments: {
-        FT: 4,
-        ST: 3,
-        IT: 1,
-      },
-    },
-    {
-      month: "Aug",
-      salary: 580000,
-      totalEmployees: 8,
-      totalMale: 5,
-      totalFemale: 3,
-      totalRegular: 7,
-      totalProbation: 1,
-      departments: {
-        FT: 4,
-        ST: 3,
-        IT: 1,
-      },
-    },
-    {
-      month: "Sep",
-      salary: 590000,
-      totalEmployees: 9,
-      totalMale: 5,
-      totalFemale: 4,
-      totalRegular: 8,
-      totalProbation: 1,
-      departments: {
-        FT: 5,
-        ST: 3,
-        IT: 1,
-      },
-    },
-    {
-      month: "Oct",
-      salary: 600000,
-      totalEmployees: 10,
-      totalMale: 6,
-      totalFemale: 4,
-      totalRegular: 9,
-      totalProbation: 1,
-      departments: {
-        FT: 5,
-        ST: 4,
-        IT: 1,
-      },
-    },
-    {
-      month: "Nov",
-      salary: 610000,
-      totalEmployees: 10,
-      totalMale: 6,
-      totalFemale: 4,
-      totalRegular: 9,
-      totalProbation: 1,
-      departments: {
-        FT: 5,
-        ST: 4,
-        IT: 1,
-      },
-    },
-    {
-      month: "Dec",
-      salary: 620000,
-      totalEmployees: 11,
-      totalMale: 7,
-      totalFemale: 4,
-      totalRegular: 10,
-      totalProbation: 1,
-      departments: {
-        FT: 6,
-        ST: 4,
-        IT: 1,
-      },
-    },
-  ];
+app.get("/api/employees/monthly-salary", async (req, res) => {
+  // const data = [
+  //   {
+  //     month: "Jan",
+  //     salary: 500000,
+  //     totalEmployees: 5,
+  //     totalMale: 3,
+  //     totalFemale: 2,
+  //     totalRegular: 4,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 3,
+  //       ST: 1,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Feb",
+  //     salary: 520000,
+  //     totalEmployees: 5,
+  //     totalMale: 3,
+  //     totalFemale: 2,
+  //     totalRegular: 4,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 3,
+  //       ST: 1,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Mar",
+  //     salary: 530000,
+  //     totalEmployees: 6,
+  //     totalMale: 4,
+  //     totalFemale: 2,
+  //     totalRegular: 5,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 3,
+  //       ST: 2,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Apr",
+  //     salary: 540000,
+  //     totalEmployees: 6,
+  //     totalMale: 4,
+  //     totalFemale: 2,
+  //     totalRegular: 5,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 3,
+  //       ST: 2,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "May",
+  //     salary: 550000,
+  //     totalEmployees: 7,
+  //     totalMale: 4,
+  //     totalFemale: 3,
+  //     totalRegular: 6,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 4,
+  //       ST: 2,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Jun",
+  //     salary: 560000,
+  //     totalEmployees: 7,
+  //     totalMale: 4,
+  //     totalFemale: 3,
+  //     totalRegular: 6,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 4,
+  //       ST: 2,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Jul",
+  //     salary: 570000,
+  //     totalEmployees: 8,
+  //     totalMale: 5,
+  //     totalFemale: 3,
+  //     totalRegular: 7,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 4,
+  //       ST: 3,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Aug",
+  //     salary: 580000,
+  //     totalEmployees: 8,
+  //     totalMale: 5,
+  //     totalFemale: 3,
+  //     totalRegular: 7,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 4,
+  //       ST: 3,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Sep",
+  //     salary: 590000,
+  //     totalEmployees: 9,
+  //     totalMale: 5,
+  //     totalFemale: 4,
+  //     totalRegular: 8,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 5,
+  //       ST: 3,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Oct",
+  //     salary: 600000,
+  //     totalEmployees: 10,
+  //     totalMale: 6,
+  //     totalFemale: 4,
+  //     totalRegular: 9,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 5,
+  //       ST: 4,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Nov",
+  //     salary: 610000,
+  //     totalEmployees: 10,
+  //     totalMale: 6,
+  //     totalFemale: 4,
+  //     totalRegular: 9,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 5,
+  //       ST: 4,
+  //       IT: 1,
+  //     },
+  //   },
+  //   {
+  //     month: "Dec",
+  //     salary: 620000,
+  //     totalEmployees: 11,
+  //     totalMale: 7,
+  //     totalFemale: 4,
+  //     totalRegular: 10,
+  //     totalProbation: 1,
+  //     departments: {
+  //       FT: 6,
+  //       ST: 4,
+  //       IT: 1,
+  //     },
+  //   },
+  // ];
+
+  const data = await MongoDbClient.monthlySalary();
 
   res.status(200).send({
     data,
   });
 });
 
-app.get("/api/employees/monthly-department", (req, res) => {
-  const data = {
-    jan: { IT: 2, ST: 1, FT: 2 },
-    feb: { IT: 5, ST: 3, FT: 5 },
-    mar: { IT: 3, ST: 2, FT: 2 },
-    apr: { IT: 2, ST: 2, FT: 3 },
-    may: { IT: 1, ST: 1, FT: 2 },
-    jun: { IT: 3, ST: 1, FT: 2 },
-    jul: { IT: 2, ST: 2, FT: 3 },
-  };
+// app.get("/api/employees/monthly-department", async (req, res) => {
+//   // const data = {
+//   //   jan: { IT: 2, ST: 1, FT: 2 },
+//   //   feb: { IT: 5, ST: 3, FT: 5 },
+//   //   mar: { IT: 3, ST: 2, FT: 2 },
+//   //   apr: { IT: 2, ST: 2, FT: 3 },
+//   //   may: { IT: 1, ST: 1, FT: 2 },
+//   //   jun: { IT: 3, ST: 1, FT: 2 },
+//   //   jul: { IT: 2, ST: 2, FT: 3 },
+//   // };
 
-  res.status(200).send({
-    data,
-  });
-});
+//   const data = await MongoDbClient.monthlyDepartmentTotal();
+
+//   res.status(200).send({
+//     data,
+//   });
+// });
 
 app.get("/api/employees/:employeeId", async (req, res) => {
   const { employeeId } = req.params;
@@ -804,7 +790,7 @@ app.get("/api/employees/:employeeId", async (req, res) => {
   try {
     const employees = await MongoDbClient.getEmployeeById(employeeId);
 
-    if (!employees && !employees.length > 0) {
+    if (!employees) {
       return res
         .status(404)
         .send({ status: "fail", message: "employee not found" });
@@ -821,10 +807,10 @@ app.post("/api/employees", (req, res) => {
   const { error, value } = employeeSchema.validate(req.body);
   const createdDate = new Date().toISOString();
   const newEmployee = {
-    uuid: nanoid(),
+    //uuid: nanoid(),
     ...value,
     salary: value.salary,
-    isResign: value.resign,
+    isResign: false,
     createdDate: createdDate,
     updatedDate: createdDate,
   };
@@ -833,61 +819,67 @@ app.post("/api/employees", (req, res) => {
     return res.status(400).send({ error: error.details[0].message });
   }
 
-  employees.push(newEmployee);
+  MongoDbClient.insertEmployee(newEmployee);
   res.status(201).send(newEmployee);
 });
 
-app.put("/employees/:employeeId", (req, res) => {
-  const { employeeId } = req.params;
-  const { error, value } = employeeSchema.validate(req.body);
-  const employeeIndex = employees.findIndex(
-    (employee) => employee.uuid == employeeId
-  );
+app.patch("/api/employees/:employeeId", async (req, res) => {
+  try {
+    const { employeeId } = req.params;
+    const { error, value } = employeeSchema.validate(req.body);
 
-  if (employeeIndex === -1) {
-    return res
-      .status(404)
-      .send({ status: "fail", message: "employee not found" });
+    const employeeUpdatedData = {
+      ...value,
+      updatedDate: new Date().toISOString(),
+    };
+
+    if (error) {
+      return res.status(400).send({ error: error.details[0].message });
+    }
+
+    const result = await MongoDbClient.updateEmployee(
+      employeeId,
+      employeeUpdatedData
+    );
+
+    if (!result) {
+      return res
+        .status(400)
+        .send({ status: "failed", message: "employee not found" });
+    }
+
+    res.status(200).send({
+      status: "sucess",
+      message: "employee details has been updated",
+      result: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      status: "failed",
+      message: "an error occured when trying to update employee",
+    });
   }
-
-  if (error) {
-    return res
-      .status(400)
-      .send({ status: "fail", message: error.details[0].message });
-  }
-
-  const employeeUpdatedData = {
-    uuid: employeeId,
-    ...value,
-    updatedDate: new Date().toISOString(),
-    salary: value.salary,
-    isResign: value.resign,
-  };
-
-  employees[employeeIndex] = employeeUpdatedData;
-  res.status(200).send({
-    status: "success",
-    data: employees[employeeIndex],
-    message: "employee details has been updated",
-  });
 });
 
-app.delete("/employees/:employeeId", (req, res) => {
+app.delete("/api/employees/:employeeId", async (req, res) => {
   const { employeeId } = req.params;
-  const employeeIndex = employees.findIndex(
-    (employee) => employee.uuid == employeeId
-  );
 
-  if (!employeeIndex) {
-    res.status(404).send({ status: "fail", message: "employee not found" });
+  try {
+    const delEmployee = await MongoDbClient.deleteEmployee(employeeId);
+    if (!delEmployee) {
+      return res
+        .status(404)
+        .send({ status: "fail", message: "employee not found" });
+    }
+
+    res.status(200).send({
+      status: "success",
+      message: "employee has been deleted",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ status: "error", message: "server error" });
   }
-
-  //employees.splice(employeeIndex, 1);
-  res.status(200).send({
-    status: "success",
-    data: employees[employeeIndex],
-    message: "employee has been deleted",
-  });
 });
 
 app.listen(port, () => {
