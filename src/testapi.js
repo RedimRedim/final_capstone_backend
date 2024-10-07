@@ -561,7 +561,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:8080", // Allow only this origin
+    origin: ["http://localhost:8080", "http://localhost:8081"], // Allow only this origin
   })
 );
 
@@ -759,7 +759,7 @@ app.get("/api/employees/monthly-salary", async (req, res) => {
   //   },
   // ];
 
-  const data = await MongoDbClient.monthlySalary();
+  const data = await MongoDbClient.getMonthlySalary();
 
   res.status(200).send({
     data,

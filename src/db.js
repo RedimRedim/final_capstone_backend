@@ -9,17 +9,27 @@ class MongoDb {
   }
 
   async connectDb() {
-    try {
-      if (this.employees) return;
+    let client;
 
-      const client = new MongoClient(process.env.MONGODB_URL);
+    try {
+      client = new MongoClient(process.env.MONGODB_URLCLOUD);
+      console.log("Cloud DB has been connected");
+
       await client.connect();
-      const database = client.db(process.env.DB_NAME);
-      this.employees = database.collection("employees");
-      console.log("Database has been connected");
     } catch (error) {
-      console.error("Failed to connect to MongoDB server", error);
+      console.log("Failed to connect Cloud MongoDB, trying local MongoDB");
+
+      try {
+        client = new MongoClient(process.env.MONGODB_URL); //LOCAL
+        await client.connect();
+        console.log("Local DB has been connected");
+      } catch (error) {
+        console.log("Failed to connect Local MongoDB");
+      }
     }
+
+    const database = client.db(process.env.DB_NAME);
+    this.employees = database.collection("employees");
   }
 
   async getAllEmployees({ department, sex, employeeType }) {
@@ -85,73 +95,73 @@ class MongoDb {
     }
   }
 
-  async monthlySalary() {
+  async getMonthlySalary() {
     try {
-      const result = await this.employees
-        .aggregate([
-          {
-            $addFields: {
-              createdDate: { $toDate: "$createdDate" },
-            },
-          },
-          {
-            $group: {
-              _id: {
-                year: { $year: "$createdDate" },
-                month: {
-                  $dateToString: { format: "%b", date: "$createdDate" },
-                },
-                department: "$department",
-                salary: {
-                  $sum: {
-                    $sum: {
-                      $map: {
-                        input: { $objectToArray: "$salary" },
-                        as: "s",
-                        in: "$$s.v",
-                      },
-                    },
-                  },
-                },
-                totalEmployees: { $sum: 1 },
-                totalMale: {
-                  $sum: { $cond: [{ $eq: ["$sex", "Male"] }, 1, 0] },
-                },
-                totalFemale: {
-                  $sum: { $cond: [{ $eq: ["$sex", "Female"] }, 1, 0] },
-                },
-                totalRegular: {
-                  $sum: {
-                    $cond: [{ $eq: ["$employeeType", "Regular"] }, 1, 0],
-                  },
-                },
-                totalProbation: {
-                  $sum: {
-                    $cond: [{ $eq: ["$employeeType", "Probation"] }, 1, 0],
-                  },
-                },
-                department: { $addToSet: "$department" },
-              },
-              count: { $sum: 1 },
-            },
-          },
-          {
-            $project: {
-              year: "$_id.year",
-              month: "$_id.month",
-              totalEmployees: "$totalEmployees",
-              totalMale: "$totalMale",
-              totalFemale: "$totalFemale",
-              totalProbation: "$totalProbation",
-              totalRegular: "$totalRegular",
-              department: "$_id.department",
-              _id: 0,
-            },
-          },
-          { $sort: { year: 1, month: 1 } },
-        ])
-        .toArray();
-
+      // const result = await this.employees
+      //   .aggregate([
+      //     {
+      //       $addFields: {
+      //         createdDate: { $toDate: "$createdDate" },
+      //       },
+      //     },
+      //     {
+      //       $group: {
+      //         _id: {
+      //           year: { $year: "$createdDate" },
+      //           month: {
+      //             $dateToString: { format: "%b", date: "$createdDate" },
+      //           },
+      //           department: "$department",
+      //           salary: {
+      //             $sum: {
+      //               $sum: {
+      //                 $map: {
+      //                   input: { $objectToArray: "$salary" },
+      //                   as: "s",
+      //                   in: "$$s.v",
+      //                 },
+      //               },
+      //             },
+      //           },
+      //           totalEmployees: { $sum: 1 },
+      //           totalMale: {
+      //             $sum: { $cond: [{ $eq: ["$sex", "Male"] }, 1, 0] },
+      //           },
+      //           totalFemale: {
+      //             $sum: { $cond: [{ $eq: ["$sex", "Female"] }, 1, 0] },
+      //           },
+      //           totalRegular: {
+      //             $sum: {
+      //               $cond: [{ $eq: ["$employeeType", "Regular"] }, 1, 0],
+      //             },
+      //           },
+      //           totalProbation: {
+      //             $sum: {
+      //               $cond: [{ $eq: ["$employeeType", "Probation"] }, 1, 0],
+      //             },
+      //           },
+      //           department: { $addToSet: "$department" },
+      //         },
+      //         count: { $sum: 1 },
+      //       },
+      //     },
+      //     {
+      //       $project: {
+      //         year: "$_id.year",
+      //         month: "$_id.month",
+      //         totalEmployees: "$totalEmployees",
+      //         totalMale: "$totalMale",
+      //         totalFemale: "$totalFemale",
+      //         totalProbation: "$totalProbation",
+      //         totalRegular: "$totalRegular",
+      //         department: "$_id.department",
+      //         _id: 0,
+      //       },
+      //     },
+      //     { $sort: { year: 1, month: 1 } },
+      //   ])
+      //   .toArray();
+      const result = "asd";
       return result;
     } catch (error) {
       console.log(error);
