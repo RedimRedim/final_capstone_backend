@@ -1,6 +1,10 @@
+const queryMonthlySalary = require("./queries/monthly-salary");
+const queryMonthlyDepartment = require("./queries/monthly-department");
 const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
-dotenv.config();
+const path = require("path");
+
+dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 
 class MongoDb {
   constructor() {
@@ -105,63 +109,23 @@ class MongoDb {
       await this.connectDb(); // Ensure the DB connection is established
       if (this.connected) {
         const result = await this.employees
-          .aggregate([
-            {
-              $addFields: {
-                createdDate: {
-                  $dateFromString: { dateString: "$createdDate" },
-                },
-              },
-            },
-            {
-              $addFields: {
-                year: {
-                  $year: "$createdDate",
-                },
-                month: {
-                  $month: "$createdDate",
-                },
-              },
-            },
+          .aggregate(queryMonthlySalary)
+          .toArray();
 
-            {
-              $group: {
-                _id: { year: "$year", month: "$month" },
-                // totalSalary: { $sum: "$salary" },
-                totalEmployees: { $sum: 1 },
-                //totalSalary: { $sum: { $toInt: "$salary.v" } },
-                totalMale: {
-                  $sum: { $cond: [{ $eq: ["$sex", "Male"] }, 1, 0] },
-                },
-                totalFemale: {
-                  $sum: { $cond: [{ $eq: ["$sex", "Female"] }, 1, 0] },
-                },
-                totalRegular: {
-                  $sum: {
-                    $cond: [{ $eq: ["$employeeType", "Regular"] }, 1, 0],
-                  },
-                },
-                totalProbation: {
-                  $sum: {
-                    $cond: [{ $eq: ["$employeeType", "Probation"] }, 1, 0],
-                  },
-                },
-              },
-            },
-            {
-              $project: {
-                _id: 0,
-                year: "$_id.year",
-                month: "$_id.month",
-                // totalSalary: 1,
-                totalEmployees: 1,
-                totalMale: 1,
-                totalFemale: 1,
-                totalRegular: 1,
-                totalProbation: 1,
-              },
-            },
-          ])
+        return result;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async getMonthlyDepartment() {
+    try {
+      await this.connectDb();
+      if (this.connected) {
+        const result = await this.employees
+          .aggregate(queryMonthlyDepartment)
           .toArray();
 
         return result;

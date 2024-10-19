@@ -1,0 +1,508 @@
+[
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626af5"
+    },
+    "uuid": "001",
+    "name": "Alice Smith",
+    "sex": "Female",
+    "department": "IT",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2023, "month": 1, "amount": 85000 },
+      { "year": 2023, "month": 2, "amount": 86000 },
+      { "year": 2023, "month": 3, "amount": 87000 },
+      { "year": 2023, "month": 4, "amount": 88000 },
+      { "year": 2023, "month": 5, "amount": 89000 },
+      { "year": 2023, "month": 6, "amount": 90000 },
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-01-15T09:00:00",
+    "updatedDate": "2023-01-10T10:30:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626af6"
+    },
+    "uuid": "002",
+    "name": "Bob Johnson",
+    "sex": "Male",
+    "department": "IT",
+    "employeeType": "Probation",
+    "role": "DevOps Engineer",
+    "salary": [
+      { "year": 2023, "month": 2, "amount": 86000 },
+      { "year": 2023, "month": 3, "amount": 87000 },
+      { "year": 2023, "month": 4, "amount": 88000 },
+      { "year": 2023, "month": 5, "amount": 89000 },
+      { "year": 2023, "month": 6, "amount": 90000 },
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-02-20T11:00:00",
+    "updatedDate": "2023-02-15T14:45:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626af7"
+    },
+    "uuid": "003",
+    "name": "fff",
+    "sex": "Male",
+    "department": "ST",
+    "employeeType": "Regular",
+    "role": "DevOps Engineer",
+    "salary": [
+      { "year": 2023, "month": 3, "amount": 87000 },
+      { "year": 2023, "month": 4, "amount": 88000 },
+      { "year": 2023, "month": 5, "amount": 89000 },
+      { "year": 2023, "month": 6, "amount": 90000 },
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-03-25T08:15:00",
+    "updatedDate": "2024-10-07T08:59:10.650Z"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626af8"
+    },
+    "uuid": "004",
+    "name": "Diana Prince",
+    "sex": "Female",
+    "department": "ST",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2023, "month": 4, "amount": 88000 },
+      { "year": 2023, "month": 5, "amount": 89000 },
+      { "year": 2023, "month": 6, "amount": 90000 },
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-04-30T13:30:00",
+    "updatedDate": "2023-04-25T09:00:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626af9"
+    },
+    "uuid": "005",
+    "name": "Ethan Hunt",
+    "sex": "Male",
+    "department": "FT",
+    "employeeType": "Regular",
+    "role": "DBA",
+    "salary": [
+      { "year": 2023, "month": 5, "amount": 89000 },
+      { "year": 2023, "month": 6, "amount": 90000 },
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-05-05T15:00:00",
+    "updatedDate": "2023-05-01T10:15:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626afa"
+    },
+    "uuid": "006",
+    "name": "fff",
+    "sex": "Female",
+    "department": "FT",
+    "employeeType": "Regular",
+    "role": "DBA",
+    "salary": [
+      { "year": 2023, "month": 6, "amount": 90000 },
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-06-10T10:30:00",
+    "updatedDate": "2024-10-07T08:59:33.267Z"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626afb"
+    },
+    "uuid": "007",
+    "name": "George Martin",
+    "sex": "Male",
+    "department": "IT",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2023, "month": 7, "amount": 91000 },
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-07-15T09:00:00",
+    "updatedDate": "2023-07-10T10:30:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626afc"
+    },
+    "uuid": "008",
+    "name": "Hannah Lee",
+    "sex": "Female",
+    "department": "IT",
+    "employeeType": "Probation",
+    "role": "DevOps Engineer",
+    "salary": [
+      { "year": 2023, "month": 8, "amount": 92000 },
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-08-20T11:00:00",
+    "updatedDate": "2023-08-15T14:45:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626afd"
+    },
+    "uuid": "009",
+    "name": "Ian Wright",
+    "sex": "Male",
+    "department": "ST",
+    "employeeType": "Regular",
+    "role": "DevOps Engineer",
+    "salary": [
+      { "year": 2023, "month": 9, "amount": 93000 },
+      { "year": 2023, "month": 10, "amount": 94000 },
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-09-25T08:15:00",
+    "updatedDate": "2023-09-20T12:00:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626afe"
+    },
+    "uuid": "010",
+    "name": "1e Doe",
+    "sex": "Female",
+    "department": "ST",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2023, "month": 11, "amount": 95000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-10-30T13:30:00",
+    "updatedDate": "2023-10-25T09:00:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626aff"
+    },
+    "uuid": "011",
+    "name": "Kevin Smith",
+    "sex": "Male",
+    "department": "FT",
+    "employeeType": "Regular",
+    "role": "DBA",
+    "salary": [
+      { "year": 2023, "month": 11, "amount": 96000 },
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-11-05T15:00:00",
+    "updatedDate": "2023-11-01T10:15:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b00"
+    },
+    "uuid": "012",
+    "name": "Laura Johnson",
+    "sex": "Female",
+    "department": "FT",
+    "employeeType": "Regular",
+    "salary": [
+      { "year": 2023, "month": 12, "amount": 96000 },
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2023-12-10T10:30:00",
+    "updatedDate": "2023-12-05T11:45:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b01"
+    },
+    "uuid": "013",
+    "name": "Michael Brown",
+    "sex": "Male",
+    "department": "IT",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2024, "month": 1, "amount": 97000 },
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2024-01-15T09:00:00",
+    "updatedDate": "2024-01-10T10:30:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b02"
+    },
+    "uuid": "014",
+    "name": "Nina Williams",
+    "sex": "Female",
+    "department": "IT",
+    "employeeType": "Probation",
+    "role": "DevOps Engineer",
+    "salary": [
+      { "year": 2024, "month": 2, "amount": 98000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2024-02-20T11:00:00",
+    "updatedDate": "2024-02-15T14:45:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b03"
+    },
+    "uuid": "007",
+    "name": "George Martin",
+    "sex": "Male",
+    "department": "IT",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2024-07-15T09:00:00",
+    "updatedDate": "2023-07-10T10:30:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b04"
+    },
+    "uuid": "008",
+    "name": "Hannah Lee",
+    "sex": "Female",
+    "department": "IT",
+    "employeeType": "Probation",
+    "role": "DevOps Engineer",
+    "salary": [
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2024-08-20T11:00:00",
+    "updatedDate": "2023-08-15T14:45:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b05"
+    },
+    "uuid": "009",
+    "name": "Ian Wright",
+    "sex": "Male",
+    "department": "ST",
+    "employeeType": "Regular",
+    "role": "DevOps Engineer",
+    "salary": [{ "year": 2024, "month": 9, "amount": 105000 }],
+    "isResign": false,
+    "createdDate": "2023-09-25T08:15:00",
+    "updatedDate": "2023-09-20T12:00:00"
+  },
+  {
+    "_id": {
+      "$oid": "66fa3b8c4832fcecd1626b06"
+    },
+    "uuid": "010",
+    "name": "1e Doe",
+    "sex": "Female",
+    "department": "ST",
+    "employeeType": "Regular",
+    "role": "Software Engineer",
+    "salary": [
+      { "year": 2024, "month": 1, "amount": 99000 },
+      { "year": 2024, "month": 2, "amount": 99000 },
+      { "year": 2024, "month": 3, "amount": 99000 },
+      { "year": 2024, "month": 4, "amount": 100000 },
+      { "year": 2024, "month": 5, "amount": 101000 },
+      { "year": 2024, "month": 6, "amount": 102000 },
+      { "year": 2024, "month": 7, "amount": 103000 },
+      { "year": 2024, "month": 8, "amount": 104000 },
+      { "year": 2024, "month": 9, "amount": 105000 }
+    ],
+    "isResign": false,
+    "createdDate": "2024-01-22T13:30:00",
+    "updatedDate": "2023-10-25T09:00:00"
+  }
+]
