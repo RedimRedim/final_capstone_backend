@@ -21,6 +21,7 @@ const employeeSchema = Joi.object({
   role: Joi.string().required(),
   salary: Joi.object().default({}),
   isResign: Joi.boolean().default(false), //first create automatically false
+  resignDate: Joi.date().default(null), //first create automatically null
 });
 
 //Middleware to parse JSON Bodies
@@ -63,7 +64,8 @@ app.get("/api/employees/monthly-salary", async (req, res) => {
 });
 
 app.get("/api/employees/monthly-department", async (req, res) => {
-  const data = await mongodb.getMonthlyDepartment();
+  'EXPECTING REQ.QUERY.DATE FORMAT = "2024-05"';
+  const data = await mongodb.getMonthlyDepartment(req.query.date);
 
   res.status(200).send({
     data,

@@ -1,5 +1,5 @@
 const queryMonthlySalary = require("./queries/monthly-salary");
-const queryMonthlyDepartment = require("./queries/monthly-department");
+const getMonthlyDepartmentQuery = require("./queries/monthly-department");
 const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
 const path = require("path");
@@ -120,10 +120,12 @@ class MongoDb {
     }
   }
 
-  async getMonthlyDepartment() {
+  async getMonthlyDepartment(date) {
     try {
       await this.connectDb();
       if (this.connected) {
+        const queryMonthlyDepartment = getMonthlyDepartmentQuery(date);
+
         const result = await this.employees
           .aggregate(queryMonthlyDepartment)
           .toArray();
