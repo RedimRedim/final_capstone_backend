@@ -1,7 +1,6 @@
 const getMonthlyDepartmentQuery = (yearMonthString) => {
   "Expecting format is 2024-05";
   const [year, month] = yearMonthString.split("-").map(Number);
-  console.log(new Date(year, month, 1));
   return [
     {
       $addFields: {
