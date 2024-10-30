@@ -3,12 +3,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626af5"
     },
-    "uuid": "001",
+    "uuid": "ID1",
     "name": "Alice Smith",
     "sex": "Female",
     "department": "IT",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 1, "amount": 85000 },
       { "year": 2023, "month": 2, "amount": 86000 },
@@ -33,12 +34,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626af6"
     },
-    "uuid": "002",
+    "uuid": "ID2",
     "name": "Bob Johnson",
     "sex": "Male",
     "department": "IT",
     "employeeType": "Probation",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 2, "amount": 86000 },
       { "year": 2023, "month": 3, "amount": 87000 },
@@ -70,12 +72,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626af7"
     },
-    "uuid": "003",
+    "uuid": "ID3",
     "name": "fff",
     "sex": "Male",
     "department": "ST",
     "employeeType": "Regular",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 3, "amount": 87000 },
       { "year": 2023, "month": 4, "amount": 88000 },
@@ -106,12 +109,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626af8"
     },
-    "uuid": "004",
+    "uuid": "ID4",
     "name": "Diana Prince",
     "sex": "Female",
     "department": "ST",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 4, "amount": 88000 },
       { "year": 2023, "month": 5, "amount": 89000 },
@@ -141,12 +145,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626af9"
     },
-    "uuid": "005",
+    "uuid": "ID5",
     "name": "Ethan Hunt",
     "sex": "Male",
     "department": "FT",
     "employeeType": "Regular",
     "role": "DBA",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 5, "amount": 89000 },
       { "year": 2023, "month": 6, "amount": 90000 },
@@ -174,12 +179,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626afa"
     },
-    "uuid": "006",
+    "uuid": "ID6",
     "name": "fff",
     "sex": "Female",
     "department": "FT",
     "employeeType": "Regular",
     "role": "DBA",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 6, "amount": 90000 },
       { "year": 2023, "month": 7, "amount": 91000 },
@@ -207,12 +213,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626afb"
     },
-    "uuid": "007",
+    "uuid": "ID7",
     "name": "George Martin",
     "sex": "Male",
     "department": "IT",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 7, "amount": 91000 },
       { "year": 2023, "month": 8, "amount": 92000 },
@@ -239,12 +246,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626afc"
     },
-    "uuid": "008",
+    "uuid": "ID8",
     "name": "Hannah Lee",
     "sex": "Female",
     "department": "IT",
     "employeeType": "Probation",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 8, "amount": 92000 },
       { "year": 2023, "month": 9, "amount": 93000 },
@@ -270,12 +278,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626afd"
     },
-    "uuid": "009",
+    "uuid": "ID9",
     "name": "Ian Wright",
     "sex": "Male",
     "department": "ST",
     "employeeType": "Regular",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 9, "amount": 93000 },
       { "year": 2023, "month": 10, "amount": 94000 },
@@ -300,12 +309,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626afe"
     },
-    "uuid": "010",
+    "uuid": "ID10",
     "name": "1e Doe",
     "sex": "Female",
     "department": "ST",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 11, "amount": 95000 },
       { "year": 2023, "month": 12, "amount": 96000 },
@@ -328,12 +338,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626aff"
     },
-    "uuid": "011",
+    "uuid": "ID11",
     "name": "Kevin Smith",
     "sex": "Male",
     "department": "FT",
     "employeeType": "Regular",
     "role": "DBA",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 11, "amount": 96000 },
       { "year": 2023, "month": 12, "amount": 96000 },
@@ -356,11 +367,12 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b00"
     },
-    "uuid": "012",
+    "uuid": "ID12",
     "name": "Laura Johnson",
     "sex": "Female",
     "department": "FT",
     "employeeType": "Regular",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2023, "month": 12, "amount": 96000 },
       { "year": 2024, "month": 1, "amount": 97000 },
@@ -382,12 +394,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b01"
     },
-    "uuid": "013",
+    "uuid": "ID13",
     "name": "Michael Brown",
     "sex": "Male",
     "department": "IT",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2024, "month": 1, "amount": 97000 },
       { "year": 2024, "month": 2, "amount": 98000 },
@@ -408,12 +421,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b02"
     },
-    "uuid": "014",
+    "uuid": "ID14",
     "name": "Nina Williams",
     "sex": "Female",
     "department": "IT",
     "employeeType": "Probation",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2024, "month": 2, "amount": 98000 },
       { "year": 2024, "month": 3, "amount": 99000 },
@@ -433,12 +447,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b03"
     },
-    "uuid": "007",
+    "uuid": "ID7",
     "name": "George Martin",
     "sex": "Male",
     "department": "IT",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2024, "month": 3, "amount": 99000 },
       { "year": 2024, "month": 4, "amount": 100000 },
@@ -457,12 +472,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b04"
     },
-    "uuid": "008",
+    "uuid": "ID8",
     "name": "Hannah Lee",
     "sex": "Female",
     "department": "IT",
     "employeeType": "Probation",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2024, "month": 8, "amount": 104000 },
       { "year": 2024, "month": 9, "amount": 105000 }
@@ -476,12 +492,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b05"
     },
-    "uuid": "009",
+    "uuid": "ID9",
     "name": "Ian Wright",
     "sex": "Male",
     "department": "ST",
     "employeeType": "Regular",
     "role": "DevOps Engineer",
+    "basicSalary": 100000,
     "salary": [{ "year": 2024, "month": 9, "amount": 105000 }],
     "isResign": false,
     "resignDate": null,
@@ -492,12 +509,13 @@
     "_id": {
       "$oid": "66fa3b8c4832fcecd1626b06"
     },
-    "uuid": "010",
+    "uuid": "ID10",
     "name": "1e Doe",
     "sex": "Female",
     "department": "ST",
     "employeeType": "Regular",
     "role": "Software Engineer",
+    "basicSalary": 100000,
     "salary": [
       { "year": 2024, "month": 1, "amount": 99000 },
       { "year": 2024, "month": 2, "amount": 99000 },

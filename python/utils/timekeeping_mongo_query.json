@@ -1,0 +1,36 @@
+[
+  {
+    "$group": {
+      "_id": { "uuid": "$uuid" },
+      "totalAbsent": { "$sum": "$absent" },
+      "totalLateMinutes": { "$sum": "$late" },
+      "totalRestDay": {
+        "$sum": { "$cond": [{ "$eq": ["$status", "RD"] }, 1, 0] }
+      },
+      "totalFinishedWork": { "$sum": "$finishedWork" }
+    }
+  },
+  {
+    "$lookup": {
+      "from": "employees",
+      "localField": "_id.uuid",
+      "foreignField": "uuid",
+      "as": "emp_details"
+    }
+  },
+
+  {
+    "$project": {
+      "_id": 1,
+      "uuid": 1,
+      "name": { "$arrayElemAt": ["$emp_details.name", 0] },
+      "basicSalary": {
+        "$arrayElemAt": ["$emp_details.basicSalary", 0]
+      },
+      "totalAbsent": 1,
+      "totalLateMinutes": 1,
+      "totalRestDay": 1,
+      "totalFinishedWork": 1
+    }
+  }
+]

@@ -1,5 +1,6 @@
 import pandas as pd
 import pandasql as psql
+import json
 
 
 class FileHandling:
@@ -10,9 +11,12 @@ class FileHandling:
 
     def init_file(self):
         self.read_file()
+        self.calculate_rest("2024-07-01", "2024-07-30")
+        self.query_file()
         self.calculate_file()
-        self.monthly_timekeeping_dates("2024-07-01", "2024-07-30")
-        # self.query_file()
+
+        jsonData = self.convert_to_json(self.mainDf)
+        return jsonData
 
     def read_file(self):
         if self.filePath.endswith(".xlsx"):
@@ -23,12 +27,32 @@ class FileHandling:
             self.restDf = pd.read_csv(self.filePath, sheet_name="RD")
 
     def calculate_file(self):
-        self.mainDf["timeIn"] = pd.to_datetime(self.mainDf["timeIn"])
-        self.mainDf["timeOut"] = pd.to_datetime(self.mainDf["timeOut"])
-        self.mainDf["totalWorkHours"] = self.mainDf["timeOut"] - self.mainDf["timeIn"]
+
+        # Calculate Employee Timekeeping
+        self.mainDf["timeIn"] = pd.to_datetime(self.mainDf["timeIn"], errors="coerce")
+        self.mainDf["timeOut"] = pd.to_datetime(self.mainDf["timeOut"], errors="coerce")
+        self.mainDf["workingTime"] = pd.to_datetime(
+            self.mainDf["workingTime"], errors="coerce"
+        )
 
         self.mainDf["totalWorkHours"] = self.mainDf.apply(
-            lambda row: row["totalWorkHours"].total_seconds() / 3600, axis=1
+            lambda row: (
+                8 * 60
+                if row["status"] == "RD"
+                and pd.isna(row["timeIn"])
+                and pd.isna(row["timeOut"])
+                else (row["timeOut"] - row["timeIn"]).total_seconds() / 60
+            ),
+            axis=1,
+        )
+
+        self.mainDf["finishedWork"] = self.mainDf.apply(
+            lambda row: (
+                1
+                if pd.notnull(row["totalWorkHours"]) and row["totalWorkHours"] > 320
+                else 0
+            ),
+            axis=1,
         )
 
         self.mainDf["late"] = self.mainDf.apply(
@@ -47,15 +71,16 @@ class FileHandling:
                 1
                 if pd.isna(row["timeIn"])
                 and pd.isna(row["timeOut"])
-                and row["workingTime"] != "RD"
+                and row["status"] != "RD"
                 and pd.isna(row["totalWorkHours"])
-                else ""
+                else 0
             ),
             axis=1,
         )
 
     def calculate_rest(self, start, end):
-
+        # TODOS
+        # list out all monthly dates with employee RD and merging through monthly dates
         employeesDf = self.mainDf.drop_duplicates(subset=["uuid"], keep="first")
         employeesDf = employeesDf[["uuid", "name"]]
 
@@ -66,20 +91,46 @@ class FileHandling:
 
         result = pd.merge(employeesDf, datesDf, on="key").drop("key", axis=1)
         restDf = self.restDf
-        query = """SELECT result.uuid, result.name, DATE(result.date), restDf.status FROM result LEFT JOIN restDf on restDf.date = result.date"""
+        query = """SELECT result.uuid, result.name, DATE(result.date) as date, restDf.status FROM result LEFT JOIN restDf on restDf.date = result.date"""
         self.restDf = psql.sqldf(query, locals())
 
     def query_file(self):
-        # datesDf = self.datesDf
-        # mainDf = self.mainDf
+        # merging all employees dates with timeIn timeOut
+        restDf = self.restDf
+        mainDf = self.mainDf
 
         query = """
-            SELECT datesDf.*,
-            FROM datesDf
-            LEFT JOIN self.mainDf
-            on datesDf.date = self.mainDf.date
+            SELECT restDf.*, mainDf.workingTime, mainDf.timeIn, mainDf.timeOut
+            FROM restDf
+            LEFT JOIN mainDf
+            on restDf.date = DATE(mainDf.workingTime)
             """
-        resultSqlDf = psql.sqldf(query, locals())
-        print(resultSqlDf)
+        self.mainDf = psql.sqldf(query, locals())
 
     # implementing SQL query to join and merging
+
+    def convert_to_json(self, df):
+        df["workingTime"] = pd.to_datetime(df["workingTime"], errors="coerce")
+        df["timeIn"] = pd.to_datetime(df["timeIn"], errors="coerce")
+        df["timeOut"] = pd.to_datetime(df["timeOut"], errors="coerce")
+
+        df["workingTime"] = df["workingTime"].apply(
+            lambda x: x.isoformat() if pd.notnull(x) else None
+        )
+        df["timeIn"] = df["timeIn"].apply(
+            lambda x: x.isoformat() if pd.notnull(x) else None
+        )
+
+        df["timeOut"] = df["timeOut"].apply(
+            lambda x: x.isoformat() if pd.notnull(x) else None
+        )
+
+        df["totalWorkHours"] = df["totalWorkHours"].apply(
+            lambda x: (int(x) if pd.notnull(x) and x != "" else None)
+        )
+
+        df["late"] = df["late"].apply(
+            lambda x: (int(x) if pd.notnull(x) and x != "" else None)
+        )
+        data = df.to_json(orient="records")
+        return json.loads(data)
