@@ -12,7 +12,7 @@ class FileHandling:
     def init_file(self):
         self.read_file()
         self.calculate_rest("2024-07-01", "2024-07-30")
-        self.query_file()
+        self.query_file()  # its joining with employee collection
         self.calculate_file()
 
         jsonData = self.convert_to_json(self.mainDf)

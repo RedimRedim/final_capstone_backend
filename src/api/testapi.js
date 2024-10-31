@@ -5,12 +5,12 @@ const app = express();
 const Joi = require("joi");
 const cors = require("cors");
 const { MongoDb } = require("../db/db");
+const fs = require("fs");
 const path = require("path");
+
 const mongodb = new MongoDb();
 mongodb.connectDb();
-
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
-
 const port = process.env.PORT;
 
 const employeeSchema = Joi.object({
@@ -18,6 +18,7 @@ const employeeSchema = Joi.object({
   sex: Joi.string().valid("Male", "Female").required(),
   department: Joi.string().required(),
   employeeType: Joi.string().required(),
+  dayOff: Joi.string().required(),
   role: Joi.string().required(),
   salary: Joi.object().default({}),
   isResign: Joi.boolean().default(false), //first create automatically false
@@ -109,6 +110,20 @@ app.post("/api/employees", (req, res) => {
 
   mongodb.insertEmployee(newEmployee);
   res.status(201).send(newEmployee);
+});
+
+app.post("/api/employees-sample-data", async (req, res) => {
+  try {
+    const filePath = path.join(__dirname, "../data/dbemp.employees.json");
+    //fornow havent setup req.bodyfile something like this
+    //just read file from DIR
+    const jsonData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    await mongodb.addSampleEmployeeData(jsonData);
+
+    return res.status(200).send({ status: " success", message: jsonData });
+  } catch (error) {
+    return res.status(500).send({ status: " error", message: error.message });
+  }
 });
 
 app.patch("/api/employees/:employeeId", async (req, res) => {

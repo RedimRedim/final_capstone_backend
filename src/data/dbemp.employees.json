@@ -1,8 +1,5 @@
 [
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626af5"
-    },
     "uuid": "ID1",
     "name": "Alice Smith",
     "sex": "Female",
@@ -10,6 +7,8 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
+    "dayOff": "Sunday",
     "salary": [
       { "year": 2023, "month": 1, "amount": 85000 },
       { "year": 2023, "month": 2, "amount": 86000 },
@@ -31,9 +30,6 @@
     "updatedDate": "2023-01-10T10:30:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626af6"
-    },
     "uuid": "ID2",
     "name": "Bob Johnson",
     "sex": "Male",
@@ -41,6 +37,8 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
+    "dayOff": "Saturday&Sunday",
     "salary": [
       { "year": 2023, "month": 2, "amount": 86000 },
       { "year": 2023, "month": 3, "amount": 87000 },
@@ -69,9 +67,6 @@
     "updatedDate": "2023-02-15T14:45:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626af7"
-    },
     "uuid": "ID3",
     "name": "fff",
     "sex": "Male",
@@ -79,6 +74,7 @@
     "employeeType": "Regular",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 3, "amount": 87000 },
       { "year": 2023, "month": 4, "amount": 88000 },
@@ -106,9 +102,6 @@
     "updatedDate": "2024-10-07T08:59:10.650Z"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626af8"
-    },
     "uuid": "ID4",
     "name": "Diana Prince",
     "sex": "Female",
@@ -116,6 +109,7 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 4, "amount": 88000 },
       { "year": 2023, "month": 5, "amount": 89000 },
@@ -142,9 +136,6 @@
     "updatedDate": "2023-04-25T09:00:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626af9"
-    },
     "uuid": "ID5",
     "name": "Ethan Hunt",
     "sex": "Male",
@@ -152,6 +143,7 @@
     "employeeType": "Regular",
     "role": "DBA",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 5, "amount": 89000 },
       { "year": 2023, "month": 6, "amount": 90000 },
@@ -176,9 +168,6 @@
     "updatedDate": "2023-05-01T10:15:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626afa"
-    },
     "uuid": "ID6",
     "name": "fff",
     "sex": "Female",
@@ -186,6 +175,7 @@
     "employeeType": "Regular",
     "role": "DBA",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 6, "amount": 90000 },
       { "year": 2023, "month": 7, "amount": 91000 },
@@ -210,9 +200,6 @@
     "updatedDate": "2024-10-07T08:59:33.267Z"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626afb"
-    },
     "uuid": "ID7",
     "name": "George Martin",
     "sex": "Male",
@@ -220,6 +207,7 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 7, "amount": 91000 },
       { "year": 2023, "month": 8, "amount": 92000 },
@@ -243,9 +231,6 @@
     "updatedDate": "2023-07-10T10:30:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626afc"
-    },
     "uuid": "ID8",
     "name": "Hannah Lee",
     "sex": "Female",
@@ -253,6 +238,7 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 8, "amount": 92000 },
       { "year": 2023, "month": 9, "amount": 93000 },
@@ -275,9 +261,6 @@
     "updatedDate": "2023-08-15T14:45:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626afd"
-    },
     "uuid": "ID9",
     "name": "Ian Wright",
     "sex": "Male",
@@ -285,6 +268,7 @@
     "employeeType": "Regular",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 9, "amount": 93000 },
       { "year": 2023, "month": 10, "amount": 94000 },
@@ -306,9 +290,6 @@
     "updatedDate": "2023-09-20T12:00:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626afe"
-    },
     "uuid": "ID10",
     "name": "1e Doe",
     "sex": "Female",
@@ -316,6 +297,7 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 11, "amount": 95000 },
       { "year": 2023, "month": 12, "amount": 96000 },
@@ -335,9 +317,6 @@
     "updatedDate": "2023-10-25T09:00:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626aff"
-    },
     "uuid": "ID11",
     "name": "Kevin Smith",
     "sex": "Male",
@@ -345,6 +324,7 @@
     "employeeType": "Regular",
     "role": "DBA",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 11, "amount": 96000 },
       { "year": 2023, "month": 12, "amount": 96000 },
@@ -364,15 +344,13 @@
     "updatedDate": "2023-11-01T10:15:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b00"
-    },
     "uuid": "ID12",
     "name": "Laura Johnson",
     "sex": "Female",
     "department": "FT",
     "employeeType": "Regular",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 12, "amount": 96000 },
       { "year": 2024, "month": 1, "amount": 97000 },
@@ -391,9 +369,6 @@
     "updatedDate": "2023-12-05T11:45:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b01"
-    },
     "uuid": "ID13",
     "name": "Michael Brown",
     "sex": "Male",
@@ -401,6 +376,7 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 1, "amount": 97000 },
       { "year": 2024, "month": 2, "amount": 98000 },
@@ -418,9 +394,6 @@
     "updatedDate": "2024-01-10T10:30:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b02"
-    },
     "uuid": "ID14",
     "name": "Nina Williams",
     "sex": "Female",
@@ -428,6 +401,7 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 2, "amount": 98000 },
       { "year": 2024, "month": 3, "amount": 99000 },
@@ -444,9 +418,6 @@
     "updatedDate": "2024-02-15T14:45:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b03"
-    },
     "uuid": "ID7",
     "name": "George Martin",
     "sex": "Male",
@@ -454,6 +425,7 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 3, "amount": 99000 },
       { "year": 2024, "month": 4, "amount": 100000 },
@@ -469,9 +441,6 @@
     "updatedDate": "2023-07-10T10:30:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b04"
-    },
     "uuid": "ID8",
     "name": "Hannah Lee",
     "sex": "Female",
@@ -479,6 +448,7 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 8, "amount": 104000 },
       { "year": 2024, "month": 9, "amount": 105000 }
@@ -489,9 +459,6 @@
     "updatedDate": "2023-08-15T14:45:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b05"
-    },
     "uuid": "ID9",
     "name": "Ian Wright",
     "sex": "Male",
@@ -499,6 +466,7 @@
     "employeeType": "Regular",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [{ "year": 2024, "month": 9, "amount": 105000 }],
     "isResign": false,
     "resignDate": null,
@@ -506,9 +474,6 @@
     "updatedDate": "2023-09-20T12:00:00"
   },
   {
-    "_id": {
-      "$oid": "66fa3b8c4832fcecd1626b06"
-    },
     "uuid": "ID10",
     "name": "1e Doe",
     "sex": "Female",
@@ -516,6 +481,7 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
+    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 1, "amount": 99000 },
       { "year": 2024, "month": 2, "amount": 99000 },

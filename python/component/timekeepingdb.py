@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 
-dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
+dotenv_path = os.path.join(os.path.dirname(__file__), "../../src/config/.env")
 load_dotenv(dotenv_path)
 
 
@@ -23,7 +23,7 @@ class TimekeepingDb:
             print("Connecting db..")
             await self.connect_db()
         else:
-            print("DB has been connected, no need to connect")
+            print("DB has been connected, no need to connect again.")
 
         # clear all timekeeping 1st
         self.collection.delete_many({})

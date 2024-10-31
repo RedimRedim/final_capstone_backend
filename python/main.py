@@ -1,9 +1,11 @@
-from utils.filehandling import FileHandling
-from utils.timekeepingdb import TimekeepingDb
+from component.filehandling import FileHandling
+from component.timekeepingdb import TimekeepingDb
 import asyncio
+import os
 
+path = os.path.join(os.path.dirname(__file__), "../test_salary.xlsx")
 timeKeeping = TimekeepingDb()
-fileHandling = FileHandling(r"D:\Program Files\2024\final_capstone\test_salary.xlsx")
+fileHandling = FileHandling(path)
 
 
 async def main():

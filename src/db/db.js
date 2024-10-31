@@ -38,7 +38,7 @@ class MongoDb {
     }
 
     const database = this.client.db(process.env.DB_NAME);
-    this.employees = database.collection("employees");
+    this.employees = database.collection(process.env.COLLECTION_EMPLOYEES_NAME);
   }
 
   async getAllEmployees({ department, sex, employeeType }) {
@@ -131,6 +131,20 @@ class MongoDb {
           .toArray();
 
         return result;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async addSampleEmployeeData(jsondata) {
+    try {
+      await this.connectDb();
+      if (this.connected) {
+        await this.employees.deleteMany({});
+        await this.employees.insertMany(jsondata);
+        console.log("Sample employee data added successfully");
       }
     } catch (error) {
       console.log(error);
