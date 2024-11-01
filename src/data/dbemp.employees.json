@@ -7,7 +7,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "dayOff": "Sunday",
     "salary": [
       { "year": 2023, "month": 1, "amount": 85000 },
@@ -37,7 +36,7 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
+
     "dayOff": "Saturday&Sunday",
     "salary": [
       { "year": 2023, "month": 2, "amount": 86000 },
@@ -74,7 +73,6 @@
     "employeeType": "Regular",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 3, "amount": 87000 },
       { "year": 2023, "month": 4, "amount": 88000 },
@@ -109,7 +107,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 4, "amount": 88000 },
       { "year": 2023, "month": 5, "amount": 89000 },
@@ -143,7 +140,6 @@
     "employeeType": "Regular",
     "role": "DBA",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 5, "amount": 89000 },
       { "year": 2023, "month": 6, "amount": 90000 },
@@ -175,7 +171,6 @@
     "employeeType": "Regular",
     "role": "DBA",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 6, "amount": 90000 },
       { "year": 2023, "month": 7, "amount": 91000 },
@@ -207,7 +202,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 7, "amount": 91000 },
       { "year": 2023, "month": 8, "amount": 92000 },
@@ -238,7 +232,6 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 8, "amount": 92000 },
       { "year": 2023, "month": 9, "amount": 93000 },
@@ -268,7 +261,6 @@
     "employeeType": "Regular",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 9, "amount": 93000 },
       { "year": 2023, "month": 10, "amount": 94000 },
@@ -297,7 +289,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 11, "amount": 95000 },
       { "year": 2023, "month": 12, "amount": 96000 },
@@ -324,7 +315,6 @@
     "employeeType": "Regular",
     "role": "DBA",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 11, "amount": 96000 },
       { "year": 2023, "month": 12, "amount": 96000 },
@@ -350,7 +340,6 @@
     "department": "FT",
     "employeeType": "Regular",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2023, "month": 12, "amount": 96000 },
       { "year": 2024, "month": 1, "amount": 97000 },
@@ -376,7 +365,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 1, "amount": 97000 },
       { "year": 2024, "month": 2, "amount": 98000 },
@@ -401,7 +389,6 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 2, "amount": 98000 },
       { "year": 2024, "month": 3, "amount": 99000 },
@@ -425,7 +412,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 3, "amount": 99000 },
       { "year": 2024, "month": 4, "amount": 100000 },
@@ -448,7 +434,6 @@
     "employeeType": "Probation",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 8, "amount": 104000 },
       { "year": 2024, "month": 9, "amount": 105000 }
@@ -466,7 +451,6 @@
     "employeeType": "Regular",
     "role": "DevOps Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [{ "year": 2024, "month": 9, "amount": 105000 }],
     "isResign": false,
     "resignDate": null,
@@ -481,7 +465,6 @@
     "employeeType": "Regular",
     "role": "Software Engineer",
     "basicSalary": 100000,
-    "dailySalary": 3846.15,
     "salary": [
       { "year": 2024, "month": 1, "amount": 99000 },
       { "year": 2024, "month": 2, "amount": 99000 },

@@ -1,3 +1,7 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pandas as pd
 import pandasql as psql
 import json
@@ -11,7 +15,7 @@ class FileHandling:
 
     def init_file(self):
         self.read_file()
-        self.calculate_rest("2024-07-01", "2024-07-30")
+        self.calculate_rest("2024-07-01", "2024-07-31")
         self.query_file()  # its joining with employee collection
         self.calculate_file()
 
@@ -21,10 +25,14 @@ class FileHandling:
     def read_file(self):
         if self.filePath.endswith(".xlsx"):
             self.mainDf = pd.read_excel(self.filePath)
-            self.restDf = pd.read_excel(self.filePath, sheet_name="RD")
-        elif self.filePath.endswith(".csv"):
-            self.mainDf = pd.read_csv(self.filePath)
-            self.restDf = pd.read_csv(self.filePath, sheet_name="RD")
+            self.restDf = pd.read_excel(self.filePath, sheet_name="RD").dropna()
+
+            # Drop rows where 'uuid' is None or empty
+            self.mainDf = self.mainDf[
+                self.mainDf["uuid"].notna() & (self.mainDf["uuid"] != "")
+            ]
+            print(self.mainDf)
+            print(self.restDf)
 
     def calculate_file(self):
 
@@ -38,9 +46,9 @@ class FileHandling:
         self.mainDf["totalWorkHours"] = self.mainDf.apply(
             lambda row: (
                 8 * 60
-                if row["status"] == "RD"
-                and pd.isna(row["timeIn"])
+                if pd.isna(row["timeIn"])
                 and pd.isna(row["timeOut"])
+                and row["status"] != "RD"
                 else (row["timeOut"] - row["timeIn"]).total_seconds() / 60
             ),
             axis=1,
@@ -69,10 +77,13 @@ class FileHandling:
         self.mainDf["absent"] = self.mainDf.apply(
             lambda row: (
                 1
-                if pd.isna(row["timeIn"])
-                and pd.isna(row["timeOut"])
-                and row["status"] != "RD"
-                and pd.isna(row["totalWorkHours"])
+                if (
+                    pd.isna(row["timeIn"])
+                    and pd.isna(row["timeOut"])
+                    and row["status"] != "RD"
+                    and pd.isna(row["totalWorkHours"])
+                )
+                or (row["totalWorkHours"] <= 320)
                 else 0
             ),
             axis=1,
@@ -132,5 +143,6 @@ class FileHandling:
         df["late"] = df["late"].apply(
             lambda x: (int(x) if pd.notnull(x) and x != "" else None)
         )
+
         data = df.to_json(orient="records")
         return json.loads(data)

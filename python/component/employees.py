@@ -37,7 +37,7 @@ class Employees:
             print("Client already exists")
         return self.collection
 
-    async def get_employees(self):
+    async def get_employees_data(self):
         print(f"col{self.collection}")
         if not self.collection:
             print("Connecting Employee db..")

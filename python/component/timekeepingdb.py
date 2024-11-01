@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+import pandas as pd
+import pandasql as psql
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "../../src/config/.env")
 load_dotenv(dotenv_path)
@@ -50,8 +52,21 @@ class TimekeepingDb:
         self.collection.insert_many(jsonData)
         print("Timekeeping data has been added")
 
+    async def get_timekeeping_data(self):
+        print(f"col{self.collection}")
+        if not self.collection:
+            print("Connecting Timekeeping db..")
+            await self.connect_db()
+        else:
+            print("DB has been connected, no need to connect again.")
+
+        timekeepingData = list(self.collection.find({}))
+        timekeepingDf = pd.DataFrame(timekeepingData)
+        timekeepingDf["_id"] = timekeepingDf["_id"].astype(str)
+        query = """SELECT uuid,name, COUNT(case when status like "%RD%" then 1 end) as restDay, sum(finishedwork) as finishedWork, sum(late) as late , sum(absent) as absent
+        FROM timekeepingDf GROUP BY uuid"""
+
+        timekeepingDf = psql.sqldf(query, locals())
+        return timekeepingDf
+
     # def reset_json_datatype(self,jsonData):
-
-
-# async def main():
-#     timekeeping = TimekeepingDb()
