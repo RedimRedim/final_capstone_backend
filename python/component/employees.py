@@ -13,9 +13,23 @@ class Employees:
         self.collection = None
 
     async def connect_db(self):
-        print("Inside connect_db()")
         if not self.client:
-            self.client = MongoClient(os.getenv("MONGODB_URLCLOUD"))
+            try:
+                self.client = MongoClient(
+                    os.getenv("MONGODB_URLCLOUD"), serverSelectionTimeoutMS=3000
+                )
+                self.client.admin.command("ping")
+            except Exception as e:
+                print(f"Failed to connect to cloud MongoDB: {e}")
+                try:
+                    print("Trying local")
+                    self.client = MongoClient(
+                        os.getenv("MONGODB_URL"), serverSelectionTimeoutMS=3000
+                    )
+                    self.client.admin.command("ping")
+                except Exception as e:
+                    print(f"failed to connect to local {e}")
+
             db = self.client[os.getenv("DB_NAME")]
             self.collection = db[os.getenv("COLLECTION_EMPLOYEES_NAME")]
             print("Database connected")
@@ -33,5 +47,4 @@ class Employees:
 
         employeeData = list(self.collection.find({}))
         employeeDf = pd.DataFrame(employeeData)
-        print(employeeDf)
         return employeeDf
