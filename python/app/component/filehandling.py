@@ -1,17 +1,23 @@
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+from dotenv import load_dotenv
 import pandas as pd
 import pandasql as psql
+from component.employees import Employees
 import json
+
+dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
+load_dotenv(dotenv_path)
 
 
 class FileHandling:
     def __init__(self, filePath):
         self.filePath = filePath
-        self.mainDf = None
+        self.timekeepingDf = None
         self.restDf = None
+        self.employees = Employees()  # Composition
 
     def init_file(self):
         self.read_file()
@@ -23,23 +29,64 @@ class FileHandling:
 
     def read_file(self):
         if self.filePath.endswith(".xlsx"):
-            self.mainDf = pd.read_excel(self.filePath)
+            self.timekeepingDf = self.timekeeping_with_absent_data()
             self.restDf = pd.read_excel(self.filePath, sheet_name="RD").dropna()
             # Drop rows where 'uuid' is None or empty
-            self.mainDf = self.mainDf[
-                self.mainDf["uuid"].notna() & (self.mainDf["uuid"] != "")
+            self.timekeepingDf = self.timekeepingDf[
+                self.timekeepingDf["uuid"].notna() & (self.timekeepingDf["uuid"] != "")
             ]
 
-    def calculate_file(self):
-
-        # Calculate Employee Timekeeping
-        self.mainDf["timeIn"] = pd.to_datetime(self.mainDf["timeIn"], errors="coerce")
-        self.mainDf["timeOut"] = pd.to_datetime(self.mainDf["timeOut"], errors="coerce")
-        self.mainDf["workingTime"] = pd.to_datetime(
-            self.mainDf["workingTime"], errors="coerce"
+    def timekeeping_with_absent_data(self):
+        self.timekeepingDf = pd.read_excel(self.filePath)
+        employeeData = self.employees.get_employees_data()[
+            ["uuid", "isResign", "resignDate"]
+        ]
+        self.timekeepingDf = self.timekeepingDf.merge(
+            employeeData, on="uuid", how="left"
         )
 
-        self.mainDf["totalWorkHours"] = self.mainDf.apply(
+        return self.timekeepingDf
+
+    def formatting_variable(self):
+        self.timekeepingDf["workingTime"] = pd.to_datetime(
+            self.timekeepingDf["workingTime"], errors="coerce"
+        )
+        self.timekeepingDf["timeIn"] = pd.to_datetime(
+            self.timekeepingDf["timeIn"], errors="coerce"
+        )
+        self.timekeepingDf["timeOut"] = pd.to_datetime(
+            self.timekeepingDf["timeOut"], errors="coerce"
+        )
+
+        self.timekeepingDf["resignDate"] = pd.to_datetime(
+            self.timekeepingDf["resignDate"], errors="coerce"
+        ).dt.date
+
+        self.timekeepingDf["workingTime"] = self.timekeepingDf["workingTime"].apply(
+            lambda x: x.isoformat() if pd.notnull(x) else None
+        )
+        self.timekeepingDf["timeIn"] = self.timekeepingDf["timeIn"].apply(
+            lambda x: x.isoformat() if pd.notnull(x) else None
+        )
+
+        self.timekeepingDf["timeOut"] = self.timekeepingDf["timeOut"].apply(
+            lambda x: x.isoformat() if pd.notnull(x) else None
+        )
+
+    def calculate_file(self):
+        self.formatting_variable()
+        # Calculate Employee Timekeeping
+        self.timekeepingDf["timeIn"] = pd.to_datetime(
+            self.timekeepingDf["timeIn"], errors="coerce"
+        )
+        self.timekeepingDf["timeOut"] = pd.to_datetime(
+            self.timekeepingDf["timeOut"], errors="coerce"
+        )
+        self.timekeepingDf["workingTime"] = pd.to_datetime(
+            self.timekeepingDf["workingTime"], errors="coerce"
+        )
+
+        self.timekeepingDf["totalWorkHours"] = self.timekeepingDf.apply(
             lambda row: (
                 (row["timeOut"] - row["timeIn"]).total_seconds() / 60
                 if pd.notnull(row["timeOut"]) & pd.notnull(row["timeIn"])
@@ -48,12 +95,12 @@ class FileHandling:
             axis=1,
         )
 
-        self.mainDf["finishedWork"] = self.mainDf.apply(
+        self.timekeepingDf["finishedWork"] = self.timekeepingDf.apply(
             lambda row: (1 if row["totalWorkHours"] > 320 else 0),
             axis=1,
         )
 
-        self.mainDf["late"] = self.mainDf.apply(
+        self.timekeepingDf["late"] = self.timekeepingDf.apply(
             lambda row: (
                 (row["timeIn"] - row["workingTime"]).total_seconds() / 60
                 if pd.notnull(row["timeIn"])
@@ -64,10 +111,13 @@ class FileHandling:
             axis=1,
         )
 
-        self.mainDf["absent"] = self.mainDf.apply(
+        self.timekeepingDf.to_csv("timekeeping.csv")
+
+        self.timekeepingDf["absent"] = self.timekeepingDf.apply(
             lambda row: (
                 0
                 if row["status"] == "RD"
+                or (row["isResign"] and row["workingTime"].date() > row["resignDate"])
                 else (
                     1
                     if (row["finishedWork"] == 0) or (row["totalWorkHours"] <= 320)
@@ -77,50 +127,33 @@ class FileHandling:
             axis=1,
         )
 
-        self.mainDf["workingTime"] = pd.to_datetime(
-            self.mainDf["workingTime"], errors="coerce"
-        )
-        self.mainDf["timeIn"] = pd.to_datetime(self.mainDf["timeIn"], errors="coerce")
-        self.mainDf["timeOut"] = pd.to_datetime(self.mainDf["timeOut"], errors="coerce")
+        self.timekeepingDf["totalWorkHours"] = self.timekeepingDf[
+            "totalWorkHours"
+        ].apply(lambda x: (int(x) if pd.notnull(x) and x != "" else None))
 
-        self.mainDf["workingTime"] = self.mainDf["workingTime"].apply(
-            lambda x: x.isoformat() if pd.notnull(x) else None
-        )
-        self.mainDf["timeIn"] = self.mainDf["timeIn"].apply(
-            lambda x: x.isoformat() if pd.notnull(x) else None
-        )
-
-        self.mainDf["timeOut"] = self.mainDf["timeOut"].apply(
-            lambda x: x.isoformat() if pd.notnull(x) else None
-        )
-
-        self.mainDf["totalWorkHours"] = self.mainDf["totalWorkHours"].apply(
+        self.timekeepingDf["late"] = self.timekeepingDf["late"].apply(
             lambda x: (int(x) if pd.notnull(x) and x != "" else None)
         )
 
-        self.mainDf["late"] = self.mainDf["late"].apply(
-            lambda x: (int(x) if pd.notnull(x) and x != "" else None)
-        )
-
-        self.mainDf.to_csv("timekeeping.csv")
+        self.timekeepingDf.to_csv("timekeeping.csv")
 
     def query_file(self):
         # merging all employees dates with timeIn timeOut
         restDf = self.restDf
-        mainDf = self.mainDf
+        timekeepingDf = self.timekeepingDf
 
         query = """
-            SELECT mainDf.*,
+            SELECT timekeepingDf.*,
             restDf.status 
-            FROM mainDf
+            FROM timekeepingDf
             LEFT JOIN restDf
-            on DATE(restDf.date) = DATE(mainDf.workingTime) and restDf.uuid = mainDf.uuid
+            on DATE(restDf.date) = DATE(timekeepingDf.workingTime) and restDf.uuid = timekeepingDf.uuid
             """
-        self.mainDf = psql.sqldf(query, locals())
+        self.timekeepingDf = psql.sqldf(query, locals())
 
     # implementing SQL query to join and merging
 
     def convert_to_json(self):
-        data = self.mainDf.to_json(orient="records")
+        data = self.timekeepingDf.to_json(orient="records")
 
         return json.loads(data)
