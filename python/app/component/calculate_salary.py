@@ -1,13 +1,11 @@
 import sys
 import os
+import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from component.timekeepingdb import TimekeepingDb
 from component.employees import Employees
 from utils.transform_data import calculate_working_rest_days
-import asyncio
-import pandasql as psql
-import pandas as pd
 
 
 class CalculateMonthlySalary:
@@ -17,20 +15,38 @@ class CalculateMonthlySalary:
         self.employeesDf = None
         self.timekeepingDf = None
 
-    async def merging_data(self):
-        self.employeesDf = await self.employees.get_employees_data()
-        self.timekeepingDf = await self.timekeeping.get_timekeeping_data()
+    def merging_data(self):
+        cutoff_date = pd.to_datetime("2024-07-01")
+
+        self.employeesDf = self.employees.get_employees_data()
+        self.timekeepingDf = self.timekeeping.get_timekeeping_data()
         self.employeesDf = self.employeesDf.merge(
             self.timekeepingDf, on="uuid", how="left"
         )
 
+        self.employeesDf["resignDate"] = pd.to_datetime(
+            self.employeesDf["resignDate"], errors="coerce"
+        )
+
+        self.employeesDf = self.employeesDf[
+            self.employeesDf["resignDate"].isna()
+            | (
+                self.employeesDf["isResign"]
+                & (self.employeesDf["resignDate"] >= cutoff_date)
+            )
+        ]
+
         self.employeesDf["requiredWorkDays"] = self.employeesDf.apply(
-            lambda row: calculate_working_rest_days(2024, 7, row["dayOff"])[0],
+            lambda row: calculate_working_rest_days(
+                2024, 7, row["dayOff"], row["resignDate"]
+            )[0],
             axis=1,  # workingDays
         )
 
         self.employeesDf["requiredRestDays"] = self.employeesDf.apply(
-            lambda row: calculate_working_rest_days(2024, 7, row["dayOff"])[1],
+            lambda row: calculate_working_rest_days(
+                2024, 7, row["dayOff"], row["resignDate"]
+            )[1],
             axis=1,  # restDays
         )
 
@@ -58,20 +74,14 @@ class CalculateMonthlySalary:
             axis=1,
         )
 
+        print("upload to employees.csv")
         self.employeesDf.to_csv("employees.csv")
 
-    # we need to get data from employees
-    # we also need to summarize from timekeeping to calculate
 
-    # self.employeesDf["baseSalary"] = self.employeesDf.apply(
-    #     lambda row: row[""] row["finishedWork"]
-    # )
-    # print(self.employeesDf)
+def main():
+    calculate_monthly_salary = CalculateMonthlySalary()
+    calculate_monthly_salary.merging_data()
 
 
-async def main():
-    calculateMonthlySalary = CalculateMonthlySalary()
-    await calculateMonthlySalary.merging_data()
-
-
-asyncio.run((main()))
+if __name__ == "__main__":
+    main()

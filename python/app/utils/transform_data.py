@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 
 
-def calculate_working_rest_days(year, month, off_days_input):
+def calculate_working_rest_days(year, month, offDaysInput, resignDate=None):
     days_map = {
         "Monday": 0,
         "Tuesday": 1,
@@ -15,7 +15,7 @@ def calculate_working_rest_days(year, month, off_days_input):
     }
 
     try:
-        off_days_list = [days_map[day.strip()] for day in off_days_input.split("&")]
+        off_days_list = [days_map[day.strip()] for day in offDaysInput.split("&")]
     except:
         off_days_list = []  # condition when not day off then mark as 31days
 

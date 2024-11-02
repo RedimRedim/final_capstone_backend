@@ -23,8 +23,8 @@
       { "year": 2023, "month": 12, "amount": 96000 },
       { "year": 2024, "month": 1, "amount": 97000 }
     ],
-    "isResign": true,
-    "resignDate": "2024-01-15T09:00:00",
+    "isResign": false,
+    "resignDate": null,
     "createdDate": "2023-01-15T09:00:00",
     "updatedDate": "2023-01-10T10:30:00"
   },
@@ -94,8 +94,8 @@
       { "year": 2024, "month": 8, "amount": 104000 },
       { "year": 2024, "month": 9, "amount": 105000 }
     ],
-    "isResign": false,
-    "resignDate": null,
+    "isResign": true,
+    "resignDate": "2024-07-02T08:15:00",
     "createdDate": "2023-03-25T08:15:00",
     "updatedDate": "2024-10-07T08:59:10.650Z"
   },
