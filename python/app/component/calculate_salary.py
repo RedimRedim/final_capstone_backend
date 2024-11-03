@@ -6,10 +6,16 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from component.timekeepingdb import TimekeepingDb
 from component.employees import Employees
 from utils.transform_data import calculate_working_rest_days
+from utils.db_connection import MongoDbConnection
+from dotenv import load_dotenv
+
+dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
+load_dotenv(dotenv_path)
 
 
-class CalculateMonthlySalary:
+class CalculateMonthlySalary(MongoDbConnection):
     def __init__(self) -> None:
+        super().__init__()  # Properly initialize the parent class
         self.employees = Employees()
         self.timekeeping = TimekeepingDb()
         self.employeesDf = None
@@ -55,7 +61,11 @@ class CalculateMonthlySalary:
         )
 
         self.employeesDf["baseSalary"] = self.employeesDf.apply(
-            lambda row: (row["dailySalary"] * (row["finishedWork"] + row["restDay"])),
+            lambda row: (
+                row["basicSalary"] / row["requiredWorkDays"] * row["resignDate"].day
+                if pd.notnull(row["resignDate"]) and row["resignDate"] is not pd.NaT
+                else row["dailySalary"] * (row["finishedWork"] + row["restDay"])
+            ),
             axis=1,
         )
 
@@ -69,19 +79,30 @@ class CalculateMonthlySalary:
 
         self.employeesDf["totalReleasedSalary"] = self.employeesDf.apply(
             lambda row: (
-                row["baseSalary"] - row["lateDeduction"] - row["absentDeduction"]
+                (row["baseSalary"] if pd.notnull(row["baseSalary"]) else 0)
+                - (row["lateDeduction"] if pd.notnull(row["lateDeduction"]) else 0)
+                - (row["absentDeduction"] if pd.notnull(row["absentDeduction"]) else 0)
             ),
             axis=1,
         )
-
-        print("upload to employees.csv")
+        print("Uploading employees.csv")
         self.employeesDf.to_csv("employees.csv")
+        self.post_to_db()
+
+    def post_to_db(self):
+        self.collection = self.get_collection(os.getenv("COLLECTION_SALARY_NAME"))
+
+        self.employeesDf["resignDate"] = self.employeesDf["resignDate"].fillna(
+            pd.Timestamp("1970-01-01")
+        )
+        self.collection.insert_many(self.employeesDf.to_dict("records"))
+        print("Salary has been uploaded to MongoDB")
 
 
-def main():
-    calculate_monthly_salary = CalculateMonthlySalary()
-    calculate_monthly_salary.merging_data()
+# def main():
+#     calculate_monthly_salary = CalculateMonthlySalary()
+#     calculate_monthly_salary.merging_data()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

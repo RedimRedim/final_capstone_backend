@@ -18,8 +18,9 @@ const employeeSchema = Joi.object({
   sex: Joi.string().valid("Male", "Female").required(),
   department: Joi.string().required(),
   employeeType: Joi.string().required(),
-  dayOff: Joi.string().required(),
   role: Joi.string().required(),
+  basicSalary: Joi.number().required(),
+  dayOff: Joi.string().required(),
   salary: Joi.object().default({}),
   isResign: Joi.boolean().default(false), //first create automatically false
   resignDate: Joi.date().default(null), //first create automatically null
@@ -92,14 +93,14 @@ app.get("/api/employees/:employeeId", async (req, res) => {
 });
 
 //adding newEmployee POST request
-app.post("/api/employees", (req, res) => {
+app.post("/api/employees", async (req, res) => {
+  const latestId = await mongodb.getLatestId();
+
   const { error, value } = employeeSchema.validate(req.body);
   const createdDate = new Date().toISOString();
   const newEmployee = {
-    //uuid: nanoid(),
+    uuid: `ID${latestId + 1}`,
     ...value,
-    salary: value.salary,
-    isResign: false,
     createdDate: createdDate,
     updatedDate: createdDate,
   };

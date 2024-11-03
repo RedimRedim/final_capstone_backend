@@ -1,5 +1,6 @@
-const queryMonthlySalary = require("./queries/monthly-salary");
+const MonthlySalaryQuery = require("./queries/monthly-salary");
 const getMonthlyDepartmentQuery = require("./queries/monthly-department");
+const latestIdQuery = require("./queries/latest-id");
 const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
 const path = require("path");
@@ -109,7 +110,7 @@ class MongoDb {
       await this.connectDb(); // Ensure the DB connection is established
       if (this.connected) {
         const result = await this.employees
-          .aggregate(queryMonthlySalary)
+          .aggregate(MonthlySalaryQuery)
           .toArray();
 
         return result;
@@ -145,6 +146,23 @@ class MongoDb {
         await this.employees.deleteMany({});
         await this.employees.insertMany(jsondata);
         console.log("Sample employee data added successfully");
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async getLatestId() {
+    try {
+      await this.connectDb();
+      if (this.connected) {
+        const latestId = await this.employees
+          .aggregate(latestIdQuery)
+          .toArray();
+
+        console.log(latestId);
+        return latestId[0].modified_uuid_int;
       }
     } catch (error) {
       console.log(error);

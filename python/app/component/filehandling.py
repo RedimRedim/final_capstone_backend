@@ -106,7 +106,7 @@ class FileHandling:
                 if pd.notnull(row["timeIn"])
                 and pd.notnull(row["timeOut"])
                 and row["timeIn"] > row["workingTime"]
-                else 0
+                else ""
             ),
             axis=1,
         )
@@ -121,7 +121,7 @@ class FileHandling:
                 else (
                     1
                     if (row["finishedWork"] == 0) or (row["totalWorkHours"] <= 320)
-                    else 0
+                    else ""
                 )
             ),
             axis=1,

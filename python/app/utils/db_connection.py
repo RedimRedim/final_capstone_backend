@@ -21,7 +21,7 @@ class MongoDbConnection:
         if not self.client:
             try:
                 self.client = MongoClient(
-                    os.getenv("MONGODB_URLCLOUD"), serverSelectionTimeoutMS=1000
+                    os.getenv("MONGODB_URLCLOUD"), serverSelectionTimeoutMS=2000
                 )
                 self.client.admin.command("ping")
             except Exception as e:
