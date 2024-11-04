@@ -23,7 +23,8 @@ const employeeSchema = Joi.object({
   dayOff: Joi.string().required(),
   salary: Joi.object().default({}),
   isResign: Joi.boolean().default(false), //first create automatically false
-  resignDate: Joi.date().default(null), //first create automatically null
+  resignDate: Joi.date().default(new Date("1970-01-01")), //first create automatically null
+  updatedDate: Joi.date(),
 });
 
 //Middleware to parse JSON Bodies
@@ -119,6 +120,11 @@ app.post("/api/employees-sample-data", async (req, res) => {
     //fornow havent setup req.bodyfile something like this
     //just read file from DIR
     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+
+    jsonData.forEach((data) => {
+      data.resignDate = new Date(data.resignDate);
+    });
+
     await mongodb.addSampleEmployeeData(jsonData);
 
     return res.status(200).send({ status: " success", message: jsonData });
@@ -179,6 +185,7 @@ app.delete("/api/employees/:employeeId", async (req, res) => {
     res.status(200).send({
       status: "success",
       message: "employee has been deleted",
+      data: employeeId,
     });
   } catch (error) {
     console.error(error);

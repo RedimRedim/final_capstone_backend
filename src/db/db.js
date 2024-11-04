@@ -83,7 +83,7 @@ class MongoDb {
     try {
       console.log(employeeId);
       const data = await this.employees.deleteOne({
-        _id: new ObjectId(employeeId),
+        uuid: employeeId,
       });
       return data.deletedCount == 1 ? true : false;
     } catch (error) {
@@ -93,9 +93,10 @@ class MongoDb {
   }
 
   async updateEmployee(employeeId, updatedEmployee) {
+    console.log(employeeId);
     try {
       const data = await this.employees.updateOne(
-        { _id: new ObjectId(employeeId) },
+        { uuid: employeeId },
         { $set: updatedEmployee }
       );
       return data.modifiedCount == 1 ? true : false;
