@@ -3,23 +3,23 @@ import os
 import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from component.timekeepingdb import TimekeepingDb
-from component.employees import Employees
 from utils.transform_data import calculate_working_rest_days
-from utils.db_connection import MongoDbConnection
 from dotenv import load_dotenv
+
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
 load_dotenv(dotenv_path)
 
 
-class CalculateMonthlySalary(MongoDbConnection):
-    def __init__(self) -> None:
-        super().__init__()  # Properly initialize the parent class
-        self.employees = Employees()
-        self.timekeeping = TimekeepingDb()
-        self.employeesDf = None
-        self.timekeepingDf = None
+class CalculateMonthlySalary:
+    def __init__(
+        self, employeesInstance, timekeepingDbInstance, mongoDbConnectionInstance
+    ) -> None:
+        self.employees = employeesInstance
+        self.timekeeping = timekeepingDbInstance
+        self.mongoDbInstance = mongoDbConnectionInstance
+        self.employeesDf = pd.DataFrame()  # Initialize as empty DataFrame
+        self.timekeepingDf = pd.DataFrame()  # Initialize as empty DataFrame
 
     def merging_data(self):
         cutoff_date = pd.to_datetime("2024-07-01")
@@ -86,15 +86,14 @@ class CalculateMonthlySalary(MongoDbConnection):
             axis=1,
         )
         print("Uploading employees.csv")
-        self.employeesDf.to_csv("employees.csv")
+        self.employeesDf.to_csv("./data/employees.csv")
         self.post_to_db()
 
     def post_to_db(self):
-        self.collection = self.get_collection(os.getenv("COLLECTION_SALARY_NAME"))
-
-        self.employeesDf["resignDate"] = self.employeesDf["resignDate"].fillna(
-            pd.Timestamp("1970-01-01")
+        self.collection = self.mongoDbInstance.get_collection(
+            os.getenv("COLLECTION_SALARY_NAME")
         )
+
         self.collection.insert_many(self.employeesDf.to_dict("records"))
         print("Salary has been uploaded to MongoDB")
 

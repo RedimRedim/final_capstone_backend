@@ -7,15 +7,8 @@ load_dotenv(dotenv_path)
 
 
 class MongoDbConnection:
-    _instance = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(MongoDbConnection, cls).__new__(cls)
-            cls._instance.client = None
-            cls._instance.db = None
-            cls._instance.connect_db()
-        return cls._instance
+    def __init__(self):
+        self.db = None
 
     def connect_db(self):
         if not self.client:

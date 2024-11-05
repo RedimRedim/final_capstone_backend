@@ -5,7 +5,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dotenv import load_dotenv
 import pandas as pd
 import pandasql as psql
-from component.employees import Employees
 import json
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
@@ -13,13 +12,14 @@ load_dotenv(dotenv_path)
 
 
 class FileHandling:
-    def __init__(self, filePath):
-        self.filePath = filePath
+    def __init__(self, employeesInstance):
+        self.filePath = None
         self.timekeepingDf = None
         self.restDf = None
-        self.employees = Employees()  # Composition
+        self.employees = employeesInstance
 
-    def init_file(self):
+    def init_file(self, file):
+        self.filePath = file
         self.read_file()
         self.query_file()  # its joining with employee collection
         self.calculate_file()
@@ -28,7 +28,8 @@ class FileHandling:
         return jsonData
 
     def read_file(self):
-        if self.filePath.endswith(".xlsx"):
+        print(self.filePath)
+        if self.filePath.filename.lower().endswith(".xlsx"):
             self.timekeepingDf = self.timekeeping_with_absent_data()
             self.restDf = pd.read_excel(self.filePath, sheet_name="RD").dropna()
             # Drop rows where 'uuid' is None or empty
@@ -111,13 +112,16 @@ class FileHandling:
             axis=1,
         )
 
-        self.timekeepingDf.to_csv("timekeeping.csv")
+        self.timekeepingDf.to_csv("./data/timekeeping.csv")
 
         self.timekeepingDf["absent"] = self.timekeepingDf.apply(
             lambda row: (
                 0
                 if row["status"] == "RD"
-                or (row["isResign"] and row["workingTime"].date() > row["resignDate"])
+                or (
+                    row["isResign"] == 1
+                    and row["workingTime"].date() > row["resignDate"]
+                )
                 else (
                     1
                     if (row["finishedWork"] == 0) or (row["totalWorkHours"] <= 320)
@@ -135,7 +139,7 @@ class FileHandling:
             lambda x: (int(x) if pd.notnull(x) and x != "" else None)
         )
 
-        self.timekeepingDf.to_csv("timekeeping.csv")
+        self.timekeepingDf.to_csv("./data/timekeeping.csv")
 
     def query_file(self):
         # merging all employees dates with timeIn timeOut

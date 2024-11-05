@@ -59,9 +59,9 @@ class MongoDb {
         ],
       };
       console.log("Filtering Employees....");
-      return this.employees.find(query).toArray();
+      return this.employees.find(query, { projection: { _id: 0 } }).toArray();
     }
-    return this.employees.find().toArray();
+    return this.employees.find({}, { projection: { _id: 0 } }).toArray();
   }
 
   async getEmployeeById(id) {

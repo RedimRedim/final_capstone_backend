@@ -4,21 +4,22 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from dotenv import load_dotenv
-from utils.db_connection import MongoDbConnection
 import pandas as pd
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
 load_dotenv(dotenv_path)
 
 
-class Employees(MongoDbConnection):
-    def __init__(self):
-        super().__init__()  # Properly initialize the parent class
+class Employees:
+    def __init__(self, mongoDbConnectionInstance):
         self.client = None
         self.collection = None
+        self.mongoDbInstance = mongoDbConnectionInstance
 
     def get_employees_data(self):
-        self.collection = self.get_collection(os.getenv("COLLECTION_EMPLOYEES_NAME"))
+        self.collection = self.mongoDbInstance.get_collection(
+            os.getenv("COLLECTION_EMPLOYEES_NAME")
+        )
 
         employeeData = list(self.collection.find({}))
         employeeDf = pd.DataFrame(employeeData)
