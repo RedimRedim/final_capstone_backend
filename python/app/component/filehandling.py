@@ -6,13 +6,14 @@ from dotenv import load_dotenv
 import pandas as pd
 import pandasql as psql
 import json
+from component.employees import Employees
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
 load_dotenv(dotenv_path)
 
 
 class FileHandling:
-    def __init__(self, employeesInstance):
+    def __init__(self, employeesInstance: Employees):
         self.filePath = None
         self.timekeepingDf = None
         self.restDf = None

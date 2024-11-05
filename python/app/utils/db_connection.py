@@ -8,7 +8,9 @@ load_dotenv(dotenv_path)
 
 class MongoDbConnection:
     def __init__(self):
+        self.client = None
         self.db = None
+        self.connect_db()
 
     def connect_db(self):
         if not self.client:
@@ -28,10 +30,14 @@ class MongoDbConnection:
                 except Exception as e:
                     print(f"failed to connect to local {e}")
 
+        if self.client:
             self.db = self.client[os.getenv("DB_NAME")]
             print("Database connected")
         else:
             print("Client already exists")
 
     def get_collection(self, collection):
-        return self.db[collection]
+        if self.db:
+            return self.db[collection]
+        else:
+            raise Exception("Database connection is not established")

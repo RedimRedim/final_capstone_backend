@@ -4,6 +4,9 @@ import pandas as pd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils.transform_data import calculate_working_rest_days
+from utils.db_connection import MongoDbConnection
+from component.employees import Employees
+from component.timekeepingdb import TimekeepingDb
 from dotenv import load_dotenv
 
 
@@ -13,7 +16,10 @@ load_dotenv(dotenv_path)
 
 class CalculateMonthlySalary:
     def __init__(
-        self, employeesInstance, timekeepingDbInstance, mongoDbConnectionInstance
+        self,
+        employeesInstance: Employees,
+        timekeepingDbInstance: TimekeepingDb,
+        mongoDbConnectionInstance: MongoDbConnection,
     ) -> None:
         self.employees = employeesInstance
         self.timekeeping = timekeepingDbInstance

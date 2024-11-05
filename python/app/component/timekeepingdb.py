@@ -5,13 +5,14 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dotenv import load_dotenv
 import pandas as pd
 import pandasql as psql
+from utils.db_connection import MongoDbConnection
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
 load_dotenv(dotenv_path)
 
 
 class TimekeepingDb:
-    def __init__(self, mongoDbConnectionInstance):
+    def __init__(self, mongoDbConnectionInstance: MongoDbConnection):
         self.client = None
         self.collection = None
         self.mongoDbInstance = mongoDbConnectionInstance
