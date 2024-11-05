@@ -100,6 +100,8 @@ class CalculateMonthlySalary:
             os.getenv("COLLECTION_SALARY_NAME")
         )
 
+        self.collection.delete_many({})
+
         self.collection.insert_many(self.employeesDf.to_dict("records"))
         print("Salary has been uploaded to MongoDB")
 
@@ -107,7 +109,3 @@ class CalculateMonthlySalary:
 # def main():
 #     calculate_monthly_salary = CalculateMonthlySalary()
 #     calculate_monthly_salary.merging_data()
-
-
-# if __name__ == "__main__":
-#     main()

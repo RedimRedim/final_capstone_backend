@@ -37,7 +37,7 @@ class MongoDbConnection:
             print("Client already exists")
 
     def get_collection(self, collection):
-        if self.db:
+        if self.db is not None:
             return self.db[collection]
         else:
             raise Exception("Database connection is not established")
