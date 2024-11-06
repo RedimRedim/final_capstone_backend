@@ -32,20 +32,17 @@ class CalculateMonthlySalary:
 
         self.employeesDf = self.employees.get_employees_data()
         self.timekeepingDf = self.timekeeping.get_timekeeping_data()
+
         self.employeesDf = self.employeesDf.merge(
             self.timekeepingDf, on="uuid", how="left"
         )
 
-        self.employeesDf["resignDate"] = pd.to_datetime(
-            self.employeesDf["resignDate"], errors="coerce"
-        )
-
         self.employeesDf = self.employeesDf[
-            self.employeesDf["resignDate"].isna()
-            | (
-                self.employeesDf["isResign"]
+            (
+                (self.employeesDf["isResign"] == True)
                 & (self.employeesDf["resignDate"] >= cutoff_date)
             )
+            | ((self.employeesDf["isResign"] == False))
         ]
 
         self.employeesDf["requiredWorkDays"] = self.employeesDf.apply(
@@ -92,6 +89,7 @@ class CalculateMonthlySalary:
             axis=1,
         )
         print("Uploading employees.csv")
+        print(self.employeesDf)
         self.employeesDf.to_csv("./data/employees.csv")
         self.post_to_db()
 

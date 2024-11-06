@@ -29,7 +29,6 @@ class FileHandling:
         return jsonData
 
     def read_file(self):
-        print(self.filePath)
         if self.filePath.filename.lower().endswith(".xlsx"):
             self.timekeepingDf = self.timekeeping_with_absent_data()
             self.restDf = pd.read_excel(self.filePath, sheet_name="RD").dropna()

@@ -40,6 +40,7 @@ class TimekeepingDb:
         FROM timekeepingDf GROUP BY uuid"""
 
         timekeepingDf = psql.sqldf(query, locals())
+
         return timekeepingDf
 
 

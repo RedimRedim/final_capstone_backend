@@ -25,6 +25,7 @@ class Employees:
 
         employeeData = list(self.collection.find({}))
         employeeDf = pd.DataFrame(employeeData)
+        print(employeeDf.dtypes)
         return employeeDf
 
 
