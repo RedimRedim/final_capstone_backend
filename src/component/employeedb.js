@@ -1,45 +1,16 @@
-const MonthlySalaryQuery = require("./queries/monthly-salary");
-const getMonthlyDepartmentQuery = require("./queries/monthly-department");
-const latestIdQuery = require("./queries/latest-id");
-const { MongoClient, ObjectId } = require("mongodb");
+const MonthlySalaryQuery = require("../queries/monthly-salary");
+const getMonthlyDepartmentQuery = require("../queries/monthly-department");
+const latestIdQuery = require("../queries/latest-id");
 const dotenv = require("dotenv");
 const path = require("path");
 
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 
-class MongoDb {
-  constructor() {
-    this.client = null;
-    this.employees = null;
-    this.connected = false;
-  }
-
-  async connectDb() {
-    if (this.connected) return;
-
-    try {
-      this.client = new MongoClient(process.env.MONGODB_URLCLOUD, {
-        serverSelectionTimeoutMS: 3000,
-      });
-
-      await this.client.connect();
-      this.connected = true;
-      console.log("Cloud DB has been connected");
-    } catch (error) {
-      console.log("Failed to connect Cloud MongoDB, trying local MongoDB");
-
-      try {
-        this.client = new MongoClient(process.env.MONGODB_URL); //LOCAL
-        await this.client.connect();
-        this.connected = true;
-        console.log("Local DB has been connected");
-      } catch (error) {
-        console.log("Failed to connect Local MongoDB");
-      }
-    }
-
-    const database = this.client.db(process.env.DB_NAME);
-    this.employees = database.collection(process.env.COLLECTION_EMPLOYEES_NAME);
+class MongoDbEmployees {
+  constructor(MongoDbInstance) {
+    this.collection = MongoDbInstance.getCollection(
+      process.env.COLLECTION_EMPLOYEES_NAME
+    );
   }
 
   async getAllEmployees({ department, sex, employeeType }) {
@@ -59,20 +30,20 @@ class MongoDb {
         ],
       };
       console.log("Filtering Employees....");
-      return this.employees.find(query, { projection: { _id: 0 } }).toArray();
+      return this.collection.find(query, { projection: { _id: 0 } }).toArray();
     }
-    return this.employees.find({}, { projection: { _id: 0 } }).toArray();
+    return this.collection.find({}, { projection: { _id: 0 } }).toArray();
   }
 
   async getEmployeeById(id) {
     console.log("Getting Employee by ID....");
-    return await this.employees.findOne({ _id: new ObjectId(id) });
+    return await this.collection.findOne({ _id: new ObjectId(id) });
   }
 
   async insertEmployee(newEmployee) {
     try {
       console.log(newEmployee);
-      await this.employees.insertOne(newEmployee);
+      await this.collection.insertOne(newEmployee);
       console.log("Employee added successfully");
     } catch (error) {
       console.log(error);
@@ -82,7 +53,7 @@ class MongoDb {
   async deleteEmployee(employeeId) {
     try {
       console.log(employeeId);
-      const data = await this.employees.deleteOne({
+      const data = await this.collection.deleteOne({
         uuid: employeeId,
       });
       return data.deletedCount == 1 ? true : false;
@@ -95,7 +66,7 @@ class MongoDb {
   async updateEmployee(employeeId, updatedEmployee) {
     console.log(employeeId);
     try {
-      const data = await this.employees.updateOne(
+      const data = await this.collection.updateOne(
         { uuid: employeeId },
         { $set: updatedEmployee }
       );
@@ -110,7 +81,7 @@ class MongoDb {
     try {
       await this.connectDb(); // Ensure the DB connection is established
       if (this.connected) {
-        const result = await this.employees
+        const result = await this.collection
           .aggregate(MonthlySalaryQuery)
           .toArray();
 
@@ -128,7 +99,7 @@ class MongoDb {
       if (this.connected) {
         const queryMonthlyDepartment = getMonthlyDepartmentQuery(date);
 
-        const result = await this.employees
+        const result = await this.collection
           .aggregate(queryMonthlyDepartment)
           .toArray();
 
@@ -144,8 +115,8 @@ class MongoDb {
     try {
       await this.connectDb();
       if (this.connected) {
-        await this.employees.deleteMany({});
-        await this.employees.insertMany(jsondata);
+        await this.collection.deleteMany({});
+        await this.collection.insertMany(jsondata);
         console.log("Sample employee data added successfully");
       }
     } catch (error) {
@@ -158,7 +129,7 @@ class MongoDb {
     try {
       await this.connectDb();
       if (this.connected) {
-        const latestId = await this.employees
+        const latestId = await this.collection
           .aggregate(latestIdQuery)
           .toArray();
 
@@ -173,5 +144,5 @@ class MongoDb {
 }
 
 module.exports = {
-  MongoDb,
+  MongoDbEmployees,
 };

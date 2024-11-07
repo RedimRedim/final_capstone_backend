@@ -4,12 +4,14 @@ const dotenv = require("dotenv");
 const app = express();
 const Joi = require("joi");
 const cors = require("cors");
-const { MongoDb } = require("../db/db");
 const fs = require("fs");
 const path = require("path");
+const { MongoDbManager } = require("../utils/mongodb-connection");
+const { MongoDbEmployees } = require("../component/employeedb");
 
-const mongodb = new MongoDb();
-mongodb.connectDb();
+const mongodb = new MongoDbManager();
+const mongoDbEmployees = new MongoDbEmployees(mongodb);
+
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 const port = process.env.PORT;
 
@@ -39,7 +41,7 @@ app.use(
 app.get("/api/employees", async (req, res) => {
   try {
     const { department, sex, employeeType } = req.query;
-    const employees = await mongodb.getAllEmployees({
+    const employees = await mongoDbEmployees.getAllEmployees({
       department,
       sex,
       employeeType,
@@ -59,7 +61,7 @@ app.get("/api/employees", async (req, res) => {
 });
 
 app.get("/api/employees/monthly-salary", async (req, res) => {
-  const data = await mongodb.getMonthlySalary();
+  const data = await mongoDbEmployees.getMonthlySalary();
 
   res.status(200).send({
     data,
@@ -68,7 +70,7 @@ app.get("/api/employees/monthly-salary", async (req, res) => {
 
 app.get("/api/employees/monthly-department", async (req, res) => {
   'EXPECTING REQ.QUERY.DATE FORMAT = "2024-05"';
-  const data = await mongodb.getMonthlyDepartment(req.query.date);
+  const data = await mongoDbEmployees.getMonthlyDepartment(req.query.date);
 
   res.status(200).send({
     data,
@@ -79,7 +81,7 @@ app.get("/api/employees/:employeeId", async (req, res) => {
   const { employeeId } = req.params;
 
   try {
-    const employees = await mongodb.getEmployeeById(employeeId);
+    const employees = await mongoDbEmployees.getEmployeeById(employeeId);
 
     if (!employees) {
       return res
@@ -95,7 +97,7 @@ app.get("/api/employees/:employeeId", async (req, res) => {
 
 //adding newEmployee POST request
 app.post("/api/employees", async (req, res) => {
-  const latestId = await mongodb.getLatestId();
+  const latestId = await mongoDbEmployees.getLatestId();
 
   const { error, value } = employeeSchema.validate(req.body);
   const createdDate = new Date().toISOString();
@@ -110,7 +112,7 @@ app.post("/api/employees", async (req, res) => {
     return res.status(400).send({ error: error.details[0].message });
   }
 
-  mongodb.insertEmployee(newEmployee);
+  mongoDbEmployees.insertEmployee(newEmployee);
   res.status(201).send(newEmployee);
 });
 
@@ -125,7 +127,7 @@ app.post("/api/employees-sample-data", async (req, res) => {
       data.resignDate = new Date(data.resignDate);
     });
 
-    await mongodb.addSampleEmployeeData(jsonData);
+    await mongoDbEmployees.addSampleEmployeeData(jsonData);
 
     return res.status(200).send({ status: " success", message: jsonData });
   } catch (error) {
@@ -147,7 +149,7 @@ app.patch("/api/employees/:employeeId", async (req, res) => {
       return res.status(400).send({ error: error.details[0].message });
     }
 
-    const result = await mongodb.updateEmployee(
+    const result = await mongoDbEmployees.updateEmployee(
       employeeId,
       employeeUpdatedData
     );
@@ -175,7 +177,7 @@ app.delete("/api/employees/:employeeId", async (req, res) => {
   const { employeeId } = req.params;
 
   try {
-    const delEmployee = await mongodb.deleteEmployee(employeeId);
+    const delEmployee = await mongoDbEmployees.deleteEmployee(employeeId);
     if (!delEmployee) {
       return res
         .status(404)
