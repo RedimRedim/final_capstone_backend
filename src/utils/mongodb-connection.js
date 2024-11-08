@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
 const path = require("path");
 
@@ -41,11 +41,11 @@ class MongoDbManager {
 
   async getCollection(collection) {
     try {
-      if (this.collection) {
-        return this.collection;
-      } else {
-        this.connectDb(collection);
+      if (!this.collection) {
+        await this.connectDb(collection);
       }
+
+      return this.collection;
     } catch (error) {
       console.log(error);
     }

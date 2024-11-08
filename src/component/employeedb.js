@@ -8,7 +8,12 @@ dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 
 class MongoDbEmployees {
   constructor(MongoDbInstance) {
-    this.collection = MongoDbInstance.getCollection(
+    this.MongoDbInstance = MongoDbInstance;
+    this.initDb();
+  }
+
+  async initDb() {
+    this.collection = await this.MongoDbInstance.getCollection(
       process.env.COLLECTION_EMPLOYEES_NAME
     );
   }
@@ -79,14 +84,11 @@ class MongoDbEmployees {
 
   async getMonthlySalary() {
     try {
-      await this.connectDb(); // Ensure the DB connection is established
-      if (this.connected) {
-        const result = await this.collection
-          .aggregate(MonthlySalaryQuery)
-          .toArray();
+      const result = await this.collection
+        .aggregate(MonthlySalaryQuery)
+        .toArray();
 
-        return result;
-      }
+      return result;
     } catch (error) {
       console.log(error);
       return false;
@@ -95,16 +97,13 @@ class MongoDbEmployees {
 
   async getMonthlyDepartment(date) {
     try {
-      await this.connectDb();
-      if (this.connected) {
-        const queryMonthlyDepartment = getMonthlyDepartmentQuery(date);
+      const queryMonthlyDepartment = getMonthlyDepartmentQuery(date);
 
-        const result = await this.collection
-          .aggregate(queryMonthlyDepartment)
-          .toArray();
+      const result = await this.collection
+        .aggregate(queryMonthlyDepartment)
+        .toArray();
 
-        return result;
-      }
+      return result;
     } catch (error) {
       console.log(error);
       return false;
@@ -113,12 +112,9 @@ class MongoDbEmployees {
 
   async addSampleEmployeeData(jsondata) {
     try {
-      await this.connectDb();
-      if (this.connected) {
-        await this.collection.deleteMany({});
-        await this.collection.insertMany(jsondata);
-        console.log("Sample employee data added successfully");
-      }
+      await this.collection.deleteMany({});
+      await this.collection.insertMany(jsondata);
+      console.log("Sample employee data added successfully");
     } catch (error) {
       console.log(error);
       return false;
@@ -127,15 +123,10 @@ class MongoDbEmployees {
 
   async getLatestId() {
     try {
-      await this.connectDb();
-      if (this.connected) {
-        const latestId = await this.collection
-          .aggregate(latestIdQuery)
-          .toArray();
+      const latestId = await this.collection.aggregate(latestIdQuery).toArray();
 
-        console.log(latestId);
-        return latestId[0].modified_uuid_int;
-      }
+      console.log(latestId);
+      return latestId[0].modified_uuid_int;
     } catch (error) {
       console.log(error);
       return false;

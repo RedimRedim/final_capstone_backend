@@ -8,9 +8,10 @@ const fs = require("fs");
 const path = require("path");
 const { MongoDbManager } = require("../utils/mongodb-connection");
 const { MongoDbEmployees } = require("../component/employeedb");
-
+const { MongoDbSalary } = require("../component/salarydb.js");
 const mongodb = new MongoDbManager();
 const mongoDbEmployees = new MongoDbEmployees(mongodb);
+const mongoDbSalary = new MongoDbSalary(mongodb);
 
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 const port = process.env.PORT;
@@ -173,27 +174,51 @@ app.patch("/api/employees/:employeeId", async (req, res) => {
   }
 });
 
-app.delete("/api/employees/:employeeId", async (req, res) => {
-  const { employeeId } = req.params;
+app.delete(
+  "/api/employees/:employeeId",
+  async (req, res) => {
+    const { employeeId } = req.params;
 
-  try {
-    const delEmployee = await mongoDbEmployees.deleteEmployee(employeeId);
-    if (!delEmployee) {
-      return res
-        .status(404)
-        .send({ status: "fail", message: "employee not found" });
+    try {
+      const delEmployee = await mongoDbEmployees.deleteEmployee(employeeId);
+      if (!delEmployee) {
+        return res
+          .status(404)
+          .send({ status: "fail", message: "employee not found" });
+      }
+
+      res.status(200).send({
+        status: "success",
+        message: "employee has been deleted",
+        data: employeeId,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ status: "error", message: "server error" });
     }
+  },
 
-    res.status(200).send({
-      status: "success",
-      message: "employee has been deleted",
-      data: employeeId,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ status: "error", message: "server error" });
-  }
-});
+  app.get("/api/salary", async (req, res) => {
+    try {
+      const { month, year } = req.query;
+      const salaryData = await mongoDbSalary.getMonthlySalary({ month, year });
+
+      if (!salaryData && !salaryData.length > 0) {
+        return res
+          .status(404)
+          .send({ status: "fail", message: "salary not found" });
+      }
+
+      res.status(200).send({
+        status: "success",
+        data: salaryData,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ status: "error", message: "server error" });
+    }
+  })
+);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
