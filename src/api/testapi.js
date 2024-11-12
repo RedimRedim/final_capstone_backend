@@ -21,6 +21,7 @@ app.use(
     origin: [
       "https://final-capstone-frontend-7ezn.vercel.app", // Vercel frontend URL
     ],
+    credentials: true, //access-control-allow-credentials:true
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
   })
