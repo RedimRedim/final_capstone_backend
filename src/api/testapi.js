@@ -16,6 +16,12 @@ const mongoDbSalary = new MongoDbSalary(mongodb);
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 const port = process.env.PORT;
 
+app.use(
+  cors({
+    origin: process.env.VERCEL_FRONT_URL,
+  })
+);
+
 const employeeSchema = Joi.object({
   name: Joi.string().min(5).required(),
   sex: Joi.string().valid("Male", "Female").required(),
