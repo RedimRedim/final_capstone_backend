@@ -19,10 +19,10 @@ const port = process.env.PORT;
 app.use(
   cors({
     origin: [
-      process.env.VERCEL_FRONT_URL ||
-        "https://final-capstone-frontend-7ezn.vercel.app/main.html/",
+      "https://final-capstone-frontend-7ezn.vercel.app", // Vercel frontend URL
     ],
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
   })
 );
 
