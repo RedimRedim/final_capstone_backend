@@ -14,7 +14,7 @@ const mongoDbEmployees = new MongoDbEmployees(mongodb);
 const mongoDbSalary = new MongoDbSalary(mongodb);
 
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
-const port = process.env.PORT;
+const port = process.env.PORT || 2000;
 const apiUrl = process.env.RAILWAY_PROD_URL || "http://localhost:2000"; // Use the API URL from the environment or default to localhost
 
 app.use(
