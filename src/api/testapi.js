@@ -48,10 +48,13 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "http://localhost:8080",
-      "http://localhost:8081",
-      "https://final-capstone-frontend-7ezn.vercel.app",
-    ], // Allow only this origin
+      "http://localhost:8080", // Local development URL 1
+      "http://localhost:8081", // Local development URL 2
+      "https://final-capstone-frontend-ke4i.vercel.app", // Production frontend URL
+    ],
+    credentials: true, // Allow credentials if needed (cookies, authentication)
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
 );
 
