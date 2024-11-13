@@ -47,7 +47,11 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:8080", "http://localhost:8081"], // Allow only this origin
+    origin: [
+      "http://localhost:8080",
+      "http://localhost:8081",
+      "https://final-capstone-frontend-7ezn.vercel.app",
+    ], // Allow only this origin
   })
 );
 
