@@ -51,7 +51,7 @@ app.use(
   })
 );
 
-app.get(`${apiUrl}/api/employees`, async (req, res) => {
+app.get(`/api/employees`, async (req, res) => {
   try {
     const { department, sex, employeeType } = req.query;
     const employees = await mongoDbEmployees.getAllEmployees({
