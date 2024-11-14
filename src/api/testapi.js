@@ -17,27 +17,12 @@ dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 const port = process.env.PORT || 2000;
 const apiUrl = process.env.RAILWAY_PROD_URL || "http://localhost:2000"; // Use the API URL from the environment or default to localhost
 
-app.use(
-  cors({
-    origin: "https://final-capstone-frontend-7ezn.vercel.app", // specific frontend URL
-    credentials: true, // Allow credentials (cookies, etc.)
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow headers
-  })
-);
-
-// Handle preflight requests (OPTIONS method)
-app.options("*", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://final-capstone-frontend-7ezn.vercel.app"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.sendStatus(200);
+app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
 });
 
 const employeeSchema = Joi.object({
