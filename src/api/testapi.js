@@ -23,10 +23,22 @@ app.use(
       "https://final-capstone-frontend-7ezn.vercel.app", // Vercel frontend URL
     ],
     credentials: true, //access-control-allow-credentials:true
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-    allowedHeaders: ["*"], // Allow specific headers
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Explicitly specify allowed headers
   })
 );
+
+// Handle OPTIONS requests explicitly if necessary
+// Ensure that OPTIONS requests are properly handled (some CORS configurations require this explicitly)
+app.options("*", (req, res) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://final-capstone-frontend-khaki.vercel.app"
+  ); // Allow origin
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.status(204).end(); // Respond with status 204 (no content) for preflight requests
+});
 
 const employeeSchema = Joi.object({
   name: Joi.string().min(5).required(),
@@ -208,8 +220,7 @@ app.delete(
         data: employeeId,
       });
     } catch (error) {
-      console.error(error);
-      res.status(500).send({ status: "error", message: "server error" });
+      res.status(500).send({ status: "error", message: error });
     }
   },
 
