@@ -17,7 +17,15 @@ dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 const port = process.env.PORT || 2000;
 const apiUrl = process.env.RAILWAY_PROD_URL || "http://localhost:2000"; // Use the API URL from the environment or default to localhost
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://final-capstone-frontend-khaki.vercel.app", // Allow your specific frontend URL
+    credentials: true, // Allow cookies (if needed)
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow the necessary HTTP methods
+    allowedHeaders: ["Content-Type"], // Allow Content-Type header
+  })
+);
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "*");
