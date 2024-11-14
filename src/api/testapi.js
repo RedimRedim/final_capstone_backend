@@ -19,25 +19,25 @@ const apiUrl = process.env.RAILWAY_PROD_URL || "http://localhost:2000"; // Use t
 
 app.use(
   cors({
-    origin: [
-      "https://final-capstone-frontend-7ezn.vercel.app", // Vercel frontend URL
-    ],
-    credentials: true, //access-control-allow-credentials:true
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Explicitly specify allowed headers
+    origin: "https://final-capstone-frontend-7ezn.vercel.app", // specific frontend URL
+    credentials: true, // Allow credentials (cookies, etc.)
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow headers
   })
 );
 
-// Handle OPTIONS requests explicitly if necessary
-// Ensure that OPTIONS requests are properly handled (some CORS configurations require this explicitly)
+// Handle preflight requests (OPTIONS method)
 app.options("*", (req, res) => {
-  res.header(
+  res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://final-capstone-frontend-khaki.vercel.app"
-  ); // Allow origin
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.status(204).end(); // Respond with status 204 (no content) for preflight requests
+    "https://final-capstone-frontend-7ezn.vercel.app"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(200);
 });
 
 const employeeSchema = Joi.object({
