@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: "https://final-capstone-frontend-khaki.vercel.app", // Allow your specific frontend URL
     credentials: true, // Allow cookies (if needed)
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow the necessary HTTP methods
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allow the necessary HTTP methods
     allowedHeaders: ["Content-Type"], // Allow Content-Type header
   })
 );
