@@ -19,7 +19,11 @@ const apiUrl = process.env.RAILWAY_PROD_URL || "http://localhost:2000"; // Use t
 
 app.use(
   cors({
-    origin: "https://final-capstone-frontend-khaki.vercel.app", // Allow your specific frontend URL
+    origin: [
+      "https://final-capstone-frontend-khaki.vercel.app", // Allow your specific frontend URL
+      "http://localhost:3000", // Local development URL (change to match your local URL and port)
+      "http://localhost:8080",
+    ], // Another potential local dev URL if needed
     credentials: true, // Allow cookies (if needed)
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allow the necessary HTTP methods
     allowedHeaders: ["Content-Type"], // Allow Content-Type header
