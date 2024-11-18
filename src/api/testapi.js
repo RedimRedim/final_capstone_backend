@@ -94,6 +94,17 @@ app.get("/api/employees/monthly-total", async (req, res) => {
   });
 });
 
+app.get("/api/employees/monthly-salary", async (req, res) => {
+  try {
+    const data = await mongoDbSalary.getMonthlySalaryEmployees();
+    res.status(200).send({
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/api/employees/monthly-department", async (req, res) => {
   'EXPECTING ?DATE FORMAT = "2024-05"';
   "?DATE=2023-02";

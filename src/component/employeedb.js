@@ -1,5 +1,6 @@
 const queryMonthlyTotalEmployees = require("../queries/monthly-total");
 const getMonthlyDepartmentQuery = require("../queries/monthly-department");
+const queryMonthlySalary = require("../queries/monthly-salary");
 const latestIdQuery = require("../queries/latest-id");
 const dotenv = require("dotenv");
 const path = require("path");
