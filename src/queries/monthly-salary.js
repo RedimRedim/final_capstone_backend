@@ -6,6 +6,7 @@ const queryMonthlySalary = [
         year: "$year",
       },
       totalSalary: { $sum: "$totalReleasedSalary" },
+      totalEmployeesReleased: { $sum: 1 },
     },
   },
 
@@ -14,6 +15,7 @@ const queryMonthlySalary = [
       year: "$_id.year",
       month: "$_id.month",
       totalSalary: "$totalSalary",
+      totalEmployeesReleased: "$totalEmployeesReleased",
       _id: 0,
     },
   },
