@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const path = require("path");
 const queryMonthlySalary = require("../queries/monthly-salary");
+const queryMonthlyDepartment = require("../queries/monthly-department");
 dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
 
 class MongoDbSalary {
@@ -36,6 +37,19 @@ class MongoDbSalary {
     return await this.collection
       .find(query, { projection: { _id: 0 } })
       .toArray();
+  }
+
+  async getMonthlyDepartment() {
+    try {
+      const result = await this.collection
+        .aggregate(queryMonthlyDepartment)
+        .toArray();
+
+      return result;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }
 

@@ -1,59 +1,31 @@
-const getMonthlyDepartmentQuery = (yearMonthString) => {
-  "Expecting format is 2024-05";
-  const [year, month] = yearMonthString.split("-").map(Number);
-  return [
-    {
-      $addFields: {
-        createdDate: {
-          $toDate: "$createdDate",
-        },
-        resignDate: { $toDate: "$resignDate" },
+const getMonthlyDepartmentQuery = [
+  {
+    $group: {
+      _id: {
+        month: "$month",
+        year: "$year",
+        department: "$department",
+      },
+      lateMinutes: { $sum: "$late" },
+      absentDays: { $sum: "$absent" },
+      lateDeduction: { $sum: "$lateDeduction" },
+      absentDeduction: {
+        $sum: "$absentDeduction",
       },
     },
+  },
+  {
+    $project: {
+      month: "$_id.month",
+      year: "$_id.year",
+      department: "$_id.department",
+      lateMinutes: "$lateMinutes",
+      absentDays: "$absentDays",
+      lateDeduction: "$lateDeduction",
+      absentDeduction: "$absentDeduction",
+      _id: 0,
+    },
+  },
+];
 
-    {
-      $match: {
-        $and: [
-          {
-            createdDate: {
-              $lte: new Date(year, month, 1), // All records created on or before the start of the month
-            },
-          },
-          {
-            $or: [
-              { resignDate: { $lte: new Date(year, month, 1) } }, // Resigned on or before the start of the month
-              { resignDate: null }, // Not resigned
-            ],
-          },
-        ],
-      },
-    },
-
-    {
-      $group: {
-        _id: {
-          // year: {
-          //   $year: "$createdDate"
-          // },
-          // month: {
-          //   $month: "$createdDate"
-          // },
-          department: "$department",
-        },
-        totalEmployees: {
-          $sum: 1,
-        },
-      },
-    },
-    {
-      $project: {
-        _id: 0,
-        // year: "$_id.year",
-        // month: "$_id.month",
-        department: "$_id.department",
-        totalEmployees: "$totalEmployees",
-      },
-    },
-  ];
-};
 module.exports = getMonthlyDepartmentQuery;

@@ -1,6 +1,4 @@
 const queryMonthlyTotalEmployees = require("../queries/monthly-total");
-const getMonthlyDepartmentQuery = require("../queries/monthly-department");
-const queryMonthlySalary = require("../queries/monthly-salary");
 const latestIdQuery = require("../queries/latest-id");
 const dotenv = require("dotenv");
 const path = require("path");
@@ -88,21 +86,6 @@ class MongoDbEmployees {
       const result = await this.collection
         .aggregate(queryMonthlyTotalEmployees)
         .toArray();
-      return result;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-
-  async getMonthlyDepartment(date) {
-    try {
-      const queryMonthlyDepartment = getMonthlyDepartmentQuery(date);
-
-      const result = await this.collection
-        .aggregate(queryMonthlyDepartment)
-        .toArray();
-
       return result;
     } catch (error) {
       console.log(error);

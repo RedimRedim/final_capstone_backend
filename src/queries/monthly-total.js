@@ -2,6 +2,7 @@ const queryMonthlyTotalEmployees = [
   {
     $addFields: {
       createdDate: { $toDate: "$createdDate" },
+      basicSalary: { $ifNull: ["$basicSalary", 0] },
     },
   },
 
@@ -11,6 +12,7 @@ const queryMonthlyTotalEmployees = [
       year: { $year: "$createdDate" },
       sex: "$sex",
       employeeType: "$employeeType",
+      avgBasicSalary: "$basicSalary",
     },
   },
 
@@ -26,6 +28,9 @@ const queryMonthlyTotalEmployees = [
       totalProbation: {
         $sum: { $cond: [{ $eq: ["$employeeType", "Probation"] }, 1, 0] },
       },
+      avgBasicSalary: {
+        $avg: "$avgBasicSalary",
+      },
     },
   },
 
@@ -35,8 +40,10 @@ const queryMonthlyTotalEmployees = [
       month: "$_id.month",
       totalEmployees: "$totalEmployees",
       totalMale: "$totalMale",
+      totalFemale: "$totalFemale",
       totalRegular: "$totalRegular",
       totalProbation: "$totalProbation",
+      avgBasicSalary: "$avgBasicSalary",
       _id: 0,
     },
   },
