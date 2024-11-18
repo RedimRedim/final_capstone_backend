@@ -18,12 +18,27 @@ const queryMonthlySalary = [
   },
 
   {
+    $addFields: {
+      resignRatioRate: {
+        $cond: [
+          { $eq: ["$totalEmployeesReleased", 0] },
+          0,
+          {
+            $divide: ["$totalResign", "$totalEmployeesReleased"],
+          },
+        ],
+      },
+    },
+  },
+
+  {
     $project: {
       year: "$_id.year",
       month: "$_id.month",
       totalSalary: "$totalSalary",
       totalEmployeesReleased: "$totalEmployeesReleased",
       totalResign: "$totalResign",
+      resignRatioRate: "$resignRatioRate",
       _id: 0,
     },
   },
