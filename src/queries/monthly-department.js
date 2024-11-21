@@ -13,7 +13,37 @@ const getMonthlyDepartmentQuery = [
         $sum: "$absentDeduction",
       },
       totalEmployeesReleased: { $sum: 1 },
-      totalResign: { $sum: { $cond: [{ $eq: ["$isResign", true] }, 1, 0] } },
+      totalResign: {
+        $sum: {
+          $cond: [
+            {
+              $and: [
+                {
+                  $eq: ["$isResign", true],
+                },
+                {
+                  $eq: [
+                    {
+                      $month: "$resignDate",
+                    },
+                    "$month",
+                  ],
+                },
+                {
+                  $eq: [
+                    {
+                      $year: "$resignDate",
+                    },
+                    "$year",
+                  ],
+                },
+              ],
+            },
+            1,
+            0,
+          ],
+        },
+      },
     },
   },
 
