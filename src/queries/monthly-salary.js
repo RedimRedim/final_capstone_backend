@@ -4,26 +4,83 @@ const queryMonthlySalary = [
       _id: {
         month: "$month",
         year: "$year",
+        department: "$department",
       },
-      totalSalary: {
-        $sum: "$totalReleasedSalary",
+      lateMinutes: {
+        $sum: "$late",
       },
-      totalEmployeesReleased: { $sum: 1 },
+      absentDays: {
+        $sum: "$absent",
+      },
+      lateDeduction: {
+        $sum: "$lateDeduction",
+      },
+      absentDeduction: {
+        $sum: "$absentDeduction",
+      },
+      totalEmployeesReleased: {
+        $sum: 1,
+      },
       totalResign: {
         $sum: {
-          $cond: [{ $eq: ["$isResign", true] }, 1, 0],
+          $cond: [
+            {
+              $and: [
+                {
+                  $eq: ["$isResign", true],
+                },
+                {
+                  $eq: [
+                    {
+                      $month: "$resignDate",
+                    },
+                    "$month",
+                  ],
+                },
+                {
+                  $eq: [
+                    {
+                      $year: "$resignDate",
+                    },
+                    "$year",
+                  ],
+                },
+              ],
+            },
+            1,
+            0,
+          ],
         },
       },
     },
   },
-
+  {
+    $addFields: {
+      resignRatioRate: {
+        $cond: [
+          {
+            $eq: ["$totalEmployeesReleased", 0],
+          },
+          0,
+          {
+            $divide: ["$totalResign", "$totalEmployeesReleased"],
+          },
+        ],
+      },
+    },
+  },
   {
     $project: {
-      year: "$_id.year",
       month: "$_id.month",
-      totalSalary: "$totalSalary",
-      totalEmployeesReleased: "$totalEmployeesReleased",
+      year: "$_id.year",
+      department: "$_id.department",
+      totalEmployees: "$totalEmployeesReleased",
       totalResign: "$totalResign",
+      resignRatioRate: "$resignRatioRate",
+      lateMinutes: "$lateMinutes",
+      absentDays: "$absentDays",
+      lateDeduction: "$lateDeduction",
+      absentDeduction: "$absentDeduction",
       _id: 0,
     },
   },
