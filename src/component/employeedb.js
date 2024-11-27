@@ -41,7 +41,7 @@ class MongoDbEmployees {
 
   async getEmployeeById(id) {
     console.log("Getting Employee by ID....");
-    return await this.collection.findOne({ _id: new ObjectId(id) });
+    return await this.collection.findOne({ uuid: id });
   }
 
   async insertEmployee(newEmployee) {
